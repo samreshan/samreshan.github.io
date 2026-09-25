@@ -1,0 +1,17 @@
+/* Radius & borders — the mark is organic, so corners run generous; pills for actions. */
+:root {
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-2xl: 36px;
+  --radius-pill: 999px;
+  /* Organic "dab" corner, for decorative blobs only — never on text containers. */
+  --radius-blob: 62% 38% 54% 46% / 48% 56% 44% 52%;
+
+  --border-hairline: 1px;
+  --border-thick: 2px;
+  --border-heavy: 3px;
+  --border-slab: 5px;
+}

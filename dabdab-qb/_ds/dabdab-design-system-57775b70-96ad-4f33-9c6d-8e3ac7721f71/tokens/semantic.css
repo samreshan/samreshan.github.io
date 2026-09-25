@@ -1,0 +1,66 @@
+/* Semantic aliases — components reference THESE, not the raw ramps. */
+:root {
+  /* Text */
+  --text-heading: var(--ink);
+  --text-body-color: var(--n-700);
+  --text-muted: var(--n-500);
+  --text-faint: var(--n-400);
+  --text-inverse: var(--paper);
+  --text-inverse-muted: var(--alpha-paper-72);
+  --text-on-brand: var(--ink);
+  --text-link: var(--ink);
+  --text-link-hover: var(--dab-yellow-700);
+
+  /* Surfaces */
+  --surface-page: var(--paper);
+  --surface-card: var(--n-0);
+  --surface-raised: var(--n-0);
+  --surface-sunken: var(--n-50);
+  --surface-ink: var(--ink);
+  --surface-ink-raised: var(--n-800);
+  --surface-brand: var(--dab-yellow-500);
+  --surface-brand-soft: var(--dab-yellow-100);
+  --surface-brand-hover: var(--dab-yellow-400);
+  --surface-brand-active: var(--dab-yellow-600);
+  --surface-overlay: var(--n-0);
+  --surface-veil: var(--alpha-paper-72);
+
+  /* Borders */
+  --border-subtle: var(--n-100);
+  --border-default: var(--n-200);
+  --border-strong: var(--ink);
+  --border-brand: var(--dab-yellow-500);
+  --border-inverse: var(--alpha-paper-24);
+
+  /* Status */
+  --status-success-fg: #0c6a45;
+  --status-success-bg: var(--accent-green-soft);
+  --status-success-solid: var(--accent-green);
+  --status-danger-fg: #a52315;
+  --status-danger-bg: var(--accent-coral-soft);
+  --status-danger-solid: var(--accent-coral);
+  --status-warning-fg: var(--dab-yellow-800);
+  --status-warning-bg: var(--dab-yellow-100);
+  --status-warning-solid: var(--accent-orange);
+  --status-info-fg: #1a49ad;
+  --status-info-bg: var(--accent-blue-soft);
+  --status-info-solid: var(--accent-blue);
+
+  /* Decoration */
+  --pattern-tile: 520px;
+  --pattern-ink-opacity: 0.1; /* @kind other */
+}
+
+/* Ink section — drop this class on any dark band and children invert. */
+.dab-on-ink {
+  --text-heading: var(--paper);
+  --text-body-color: var(--alpha-paper-72);
+  --text-muted: var(--n-300);
+  --surface-card: var(--n-800);
+  --surface-page: var(--ink);
+  --border-subtle: var(--n-700);
+  --border-default: var(--n-600);
+  --border-strong: var(--paper);
+  --text-link: var(--dab-yellow-500);
+  color: var(--text-body-color);
+}

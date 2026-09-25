@@ -1,0 +1,33 @@
+/* Spacing — 4px base grid, plus editorial section rhythm. */
+:root {
+  --space-0: 0px;
+  --space-05: 2px;
+  --space-1: 4px;
+  --space-15: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+
+  /* Layout */
+  --gutter: var(--space-6);
+  --container-sm: 640px;
+  --container-md: 880px;
+  --container-lg: 1160px;
+  --container-xl: 1440px;
+  --section-y: var(--space-24);
+  --section-y-tight: var(--space-16);
+  --control-h-sm: 32px;
+  --control-h-md: 40px;
+  --control-h-lg: 48px;
+  --tap-min: 44px;
+}

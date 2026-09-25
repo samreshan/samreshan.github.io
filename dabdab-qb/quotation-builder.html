@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Quotation builder · dabdab</title>
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/assets.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/icons.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/radius.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/elevation.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/motion.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/semantic.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/tokens/base.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/components/core/core.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/components/forms/forms.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/components/surfaces/surfaces.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/components/navigation/navigation.css">
+  <link rel="stylesheet" href="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/styles.css">
+  <script src="_ds/dabdab-design-system-57775b70-96ad-4f33-9c6d-8e3ac7721f71/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:var(--n-50);font-family:var(--font-sans);color:var(--text-body-color)}
+    a{color:var(--ink);text-decoration-thickness:2px;text-underline-offset:3px}
+    a:hover{color:var(--dab-yellow-700)}
+    textarea::placeholder,input::placeholder{color:var(--n-300)}
+    input[type=number]{-moz-appearance:textfield}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+    @page{size:A4;margin:12mm 0}
+    [data-canvas]{overflow-x:auto}
+    [data-sheet]{box-sizing:border-box!important;width:210mm!important;max-width:none!important;min-height:297mm;padding-top:12mm!important;overflow:visible!important;border:0!important;border-radius:0!important;background-color:#fff!important;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(297mm - 2px),#b5b5b5 calc(297mm - 2px),#b5b5b5 297mm)!important}
+    [data-sheet]>section{display:block!important;overflow:visible!important;padding:12mm 14mm!important;break-inside:auto!important}
+    [data-sheet]>section:first-child{padding:0!important}
+    [data-sheet]>section>*+*{margin-top:6mm}
+    [data-sheet]>section>:first-child{break-after:avoid-page;page-break-after:avoid}
+    [data-sheet] textarea,[data-sheet] input{height:auto!important;max-height:none!important;overflow:visible!important;resize:none!important}
+    [data-keep]{break-inside:avoid-page;page-break-inside:avoid}
+    .quote-share-overlay{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:20px;background:rgba(22,22,20,.48)}
+    .quote-share-dialog{width:min(520px,100%);box-sizing:border-box;padding:28px;background:#fff;border:1px solid var(--border-default);border-radius:18px;box-shadow:0 24px 70px rgba(22,22,20,.18);color:var(--ink)}
+    .quote-share-link{box-sizing:border-box;width:100%;height:44px;padding:0 12px;border:1px solid var(--border-default);border-radius:8px;background:var(--n-50);font:12px var(--font-mono);color:var(--ink);text-overflow:ellipsis}
+    .quote-share-link:focus-visible,.quote-share-dialog button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+    @media(max-width:700px){.quote-share-dialog{padding:20px}}
+    @media print{
+      [data-noprint]{visibility:hidden!important}
+      header[data-noprint],aside[data-noprint],[data-noprint][style*="position:fixed"],.sc-logic-error{display:none!important}
+      html,body,#dc-root,#dc-root>.sc-host{height:auto!important;min-height:0!important;overflow:visible!important}
+      body{margin:0!important;background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      #dc-root>.sc-host,[data-canvas]{display:block!important;min-height:0!important;padding:0!important;overflow:visible!important;background:#fff!important}
+      [data-sheet]{margin:0!important;min-height:0!important;padding-top:0!important;box-shadow:none!important;background-image:none!important}
+      [data-sheet]>section{page-break-inside:auto!important}
+      [data-page-shift]{margin-top:0!important;break-before:page!important;page-break-before:always!important}
+      [data-sheet]>section>[data-page-shift]:not(:first-child){margin-top:6mm!important}
+      [data-sheet] textarea,[data-sheet] input{white-space:pre-wrap!important}
+      [data-sheet] textarea{overflow:visible!important}
+      [data-sheet] p,[data-sheet] li,[data-sheet] blockquote{orphans:3;widows:3}
+      [data-sheet] *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    }
+  </style>
+</helmet>
+
+<header data-noprint="1" style="position:sticky;top:0;z-index:40;min-height:64px;display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:10px 20px;box-sizing:border-box;background:var(--surface-veil);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border-subtle)">
+  <x-import component-from-global-scope="DabdabDesignSystem_57775b.Logo" lockup="horizontal" size="{{ 24 }}" tone="ink" hint-size="110px,24px"></x-import>
+  <span style="width:1px;height:24px;background:var(--border-default)"></span>
+  <div style="display:flex;flex-direction:column;min-width:0;flex:1 1 160px">
+    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Quote {{ quoteNumber }}</span>
+    <span style="font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ clientLabel }}</span>
+  </div>
+  <sc-if value="{{ ownerView }}">
+    <div style="display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--n-0);border:1px solid var(--border-subtle)">
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ editVariant }}" iconLeft="pencil" onClick="{{ toEdit }}" hint-size="72px,32px">Edit</x-import>
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ clientVariant }}" iconLeft="eye" onClick="{{ toClient }}" hint-size="120px,32px">Preview</x-import>
+    </div>
+    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="link" onClick="{{ openShare }}" hint-size="125px,32px">Share quote</x-import>
+    <sc-if value="{{ ed }}">
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="braces" onClick="{{ openDrawer }}" hint-size="110px,32px">Agent JSON</x-import>
+    </sc-if>
+  </sc-if>
+  <sc-if value="{{ sharedClient }}">
+    <span style="font-size:13px;color:var(--text-muted)">Client copy</span>
+    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="link" onClick="{{ copyResponseLink }}" hint-size="150px,32px">Copy response link</x-import>
+  </sc-if>
+  <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ink" iconLeft="printer" onClick="{{ doPrint }}" hint-size="125px,32px">Download PDF</x-import>
+</header>
+
+<sc-if value="{{ sharedClient }}">
+  <div data-noprint="1" style="padding:11px 20px;background:var(--paper);border-bottom:1px solid var(--border-subtle);font-size:13px;line-height:1.45;color:var(--text-muted);text-align:center">Review the quote, choose an option or add-ons, then copy the response link to send your choices back.</div>
+</sc-if>
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;min-height:calc(100vh - 64px)">
+  <sc-if value="{{ ed }}" hint-placeholder-val="{{ true }}">
+    <aside data-noprint="1" style="flex:0 0 300px;max-width:100%;box-sizing:border-box;position:sticky;top:64px;max-height:calc(100vh - 64px);overflow-y:auto;padding:24px 20px 48px;display:flex;flex-direction:column;gap:32px;background:var(--paper);border-right:1px solid var(--border-subtle)">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Start from</span>
+        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ templateOpts }}" value="" onChange="{{ pickTemplate }}" hint-size="100%,36px"></x-import>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Sections</span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ outline }}" as="o" hint-placeholder-count="8">
+            <div onMouseEnter="{{ o.enter }}" onMouseLeave="{{ o.leave }}" style="display:flex;align-items:center;gap:4px;min-height:44px;padding:4px 6px 4px 10px;border-radius:12px;opacity:{{ o.op }}" style-hover="background:var(--alpha-ink-04)">
+              <button onClick="{{ o.jump }}" style="all:unset;cursor:pointer;flex:1;min-width:0;display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ o.label }}</span>
+                <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ o.title }}</span>
+              </button>
+              <sc-if value="{{ o.hover }}">
+                <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="chevron-up" label="Move up" size="sm" variant="ghost" onClick="{{ o.up }}" hint-size="28px,28px"></x-import>
+                <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="chevron-down" label="Move down" size="sm" variant="ghost" onClick="{{ o.down }}" hint-size="28px,28px"></x-import>
+                <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="trash-2" label="Delete section" size="sm" variant="ghost" onClick="{{ o.rm }}" hint-size="28px,28px"></x-import>
+              </sc-if>
+              <x-import component-from-global-scope="DabdabDesignSystem_57775b.Switch" checked="{{ o.enabled }}" onChange="{{ o.toggle }}" aria-label="Show section" hint-size="40px,24px"></x-import>
+            </div>
+          </sc-for>
+        </div>
+        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ addOpts }}" value="" onChange="{{ addSection }}" hint-size="100%,36px"></x-import>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Look</span>
+        <div style="display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--n-0);border:1px solid var(--border-subtle)">
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ boldVariant }}" onClick="{{ setBold }}" fullWidth="{{ true }}" hint-size="50%,32px">Bold</x-import>
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ restrainedVariant }}" onClick="{{ setRestrained }}" fullWidth="{{ true }}" hint-size="50%,32px">Restrained</x-import>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Money</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Currency
+            <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ currencyOpts }}" value="{{ currency }}" onChange="{{ setCurrency }}" hint-size="100%,36px"></x-import>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Discount %
+            <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" type="number" value="{{ discount.v }}" onChange="{{ discount.on }}" hint-size="100%,36px"></x-import>
+          </label>
+        </div>
+        <sc-for list="{{ taxes }}" as="t" hint-placeholder-count="1">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) 72px 28px;gap:8px;align-items:end">
+            <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Tax label
+              <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" value="{{ t.label.v }}" onChange="{{ t.label.on }}" hint-size="100%,36px"></x-import>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Rate %
+              <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" type="number" value="{{ t.rate.v }}" onChange="{{ t.rate.on }}" hint-size="100%,36px"></x-import>
+            </label>
+            <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="x" label="Remove tax" size="sm" variant="ghost" onClick="{{ t.rm }}" hint-size="28px,28px"></x-import>
+          </div>
+        </sc-for>
+        <div style="display:flex">
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ addTax }}" hint-size="96px,32px">Add tax</x-import>
+        </div>
+      </div>
+    </aside>
+  </sc-if>
+
+  <div data-canvas="1" style="flex:1 1 560px;min-width:0;box-sizing:border-box;padding:40px clamp(12px, 3vw, 40px) 120px">
+    <main data-sheet="1" style="max-width:880px;margin:0 auto;background:var(--n-0);border-radius:26px;border:1px solid var(--border-subtle);box-shadow:var(--shadow-soft-2);overflow:hidden;color:var(--text-body-color);font-size:15px;line-height:1.45">
+      <sc-for list="{{ sections }}" as="s" hint-placeholder-count="4">
+        <section id="{{ s.id }}" data-screen-label="{{ s.label }}" style="padding:{{ s.pad }};border-top:{{ s.bt }};display:flex;flex-direction:column;gap:28px">
+          <sc-if value="{{ s.showHead }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <sc-if value="{{ restrained }}">
+                <span style="width:40px;height:4px;border-radius:2px;background:var(--dab-yellow-500)"></span>
+              </sc-if>
+              <sc-if value="{{ nums }}">
+                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">{{ s.num }} · {{ s.label }}</span>
+              </sc-if>
+              <textarea rows="1" value="{{ s.title.v }}" onChange="{{ s.title.on }}" placeholder="{{ ph.title }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-family:var(--font-display);font-weight:800;font-size:{{ h2 }};line-height:0.92;padding-bottom:0.12em;letter-spacing:-0.012em" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isCover }}">
+            <sc-if value="{{ bold }}" hint-placeholder-val="{{ true }}">
+              <x-import component-from-global-scope="DabdabDesignSystem_57775b.PatternPanel" tone="brand" squared="{{ true }}" tile="{{ 560 }}" hint-size="100%,520px">
+                <div style="padding:40px 14mm 48px;display:flex;flex-direction:column;gap:72px;color:var(--ink)">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Logo" lockup="horizontal" size="{{ 32 }}" tone="ink" hint-size="150px,32px"></x-import>
+                    <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase">Quotation</span>
+                  </div>
+                  <textarea rows="1" value="{{ s.title.v }}" onChange="{{ s.title.on }}" placeholder="{{ ph.title }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-family:var(--font-display);font-weight:800;font-size:88px;line-height:0.92;padding-bottom:0.12em;letter-spacing:-0.012em;max-width:12ch" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}"></textarea>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 24px;padding-top:20px;border-top:2px solid var(--ink)">
+                    <div style="display:flex;flex-direction:column;gap:4px;grid-column:span 2;min-width:0">
+                      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">Prepared for</span>
+                      <input value="{{ M.clientName.v }}" onChange="{{ M.clientName.on }}" placeholder="{{ ph.client }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:20px;font-weight:600" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
+                      <input value="{{ M.clientContact.v }}" onChange="{{ M.clientContact.on }}" placeholder="{{ ph.contact }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:14px" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
+                      <input value="{{ M.clientAddress.v }}" onChange="{{ M.clientAddress.on }}" placeholder="{{ ph.address }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:14px" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px">
+                      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">Quote no.</span>
+                      <input value="{{ M.number.v }}" onChange="{{ M.number.on }}" placeholder="{{ ph.number }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px">
+                      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">Valid until</span>
+                      <input value="{{ M.valid.v }}" onChange="{{ M.valid.on }}" placeholder="YYYY-MM-DD" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:4px">
+                      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">{{ coverPriceLabel }}</span>
+                      <span style="font-size:15px;font-weight:600">{{ coverPrice }}</span>
+                    </div>
+                  </div>
+                </div>
+              </x-import>
+            </sc-if>
+            <sc-if value="{{ restrained }}">
+              <div style="padding:40px 14mm 8px;display:flex;flex-direction:column;gap:64px;color:var(--ink)">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+                  <x-import component-from-global-scope="DabdabDesignSystem_57775b.Logo" lockup="horizontal" size="{{ 28 }}" tone="ink" hint-size="140px,28px"></x-import>
+                  <span style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)"><span style="width:8px;height:8px;border-radius:2px;background:var(--dab-yellow-500)"></span>Quotation</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:20px">
+                  <span style="width:56px;height:6px;border-radius:3px;background:var(--dab-yellow-500)"></span>
+                  <textarea rows="1" value="{{ s.title.v }}" onChange="{{ s.title.on }}" placeholder="{{ ph.title }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-family:var(--font-display);font-weight:800;font-size:72px;line-height:0.92;padding-bottom:0.12em;letter-spacing:-0.012em;max-width:14ch" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 24px;padding:20px 0 0;border-top:1px solid var(--border-default)">
+                  <div style="display:flex;flex-direction:column;gap:4px;grid-column:span 2;min-width:0">
+                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Prepared for</span>
+                    <input value="{{ M.clientName.v }}" onChange="{{ M.clientName.on }}" placeholder="{{ ph.client }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:20px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                    <input value="{{ M.clientContact.v }}" onChange="{{ M.clientContact.on }}" placeholder="{{ ph.contact }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;outline:none;border-radius:4px;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                    <input value="{{ M.clientAddress.v }}" onChange="{{ M.clientAddress.on }}" placeholder="{{ ph.address }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;outline:none;border-radius:4px;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Quote no.</span>
+                    <input value="{{ M.number.v }}" onChange="{{ M.number.on }}" placeholder="{{ ph.number }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Valid until</span>
+                    <input value="{{ M.valid.v }}" onChange="{{ M.valid.on }}" placeholder="YYYY-MM-DD" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">{{ coverPriceLabel }}</span>
+                    <span style="font-size:15px;font-weight:600;color:var(--ink)">{{ coverPrice }}</span>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <div style="padding:48px 14mm 56px;display:flex;flex-direction:column;gap:20px;max-width:640px">
+              <textarea rows="3" value="{{ s.intro.v }}" onChange="{{ s.intro.on }}" placeholder="{{ ph.intro }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:17px;line-height:1.55;text-wrap:pretty" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+              <input value="{{ s.signoff.v }}" onChange="{{ s.signoff.on }}" placeholder="{{ ph.signoff }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isOverview }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px">
+              <textarea rows="3" value="{{ s.body.v }}" onChange="{{ s.body.on }}" placeholder="{{ ph.body }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:17px;line-height:1.55;text-wrap:pretty" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Goals</span>
+                <sc-for list="{{ s.goals }}" as="g" hint-placeholder-count="3">
+                  <div style="display:flex;gap:12px;align-items:flex-start">
+                    <span style="flex:0 0 8px;height:8px;margin-top:7px;border-radius:2px;background:var(--dab-yellow-500)"></span>
+                    <textarea rows="1" value="{{ g.f.v }}" onChange="{{ g.f.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;flex:1;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <sc-if value="{{ ed }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ g.rm }}" hint-size="28px,28px"></x-import>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ ed }}">
+                  <div data-noprint="1" style="display:flex"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.addGoal }}" hint-size="100px,32px">Add goal</x-import></div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isScope }}">
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ s.items }}" as="it" hint-placeholder-count="4">
+                <div data-keep="1" style="display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1.4fr) auto;gap:8px 20px;align-items:start;padding:16px 0;border-top:1px solid var(--border-subtle)">
+                  <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding-top:2px">{{ it.n }}</span>
+                  <textarea rows="1" value="{{ it.t.v }}" onChange="{{ it.t.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:16px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  <textarea rows="1" value="{{ it.d.v }}" onChange="{{ it.d.on }}" placeholder="{{ ph.detail }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  <sc-if value="{{ ed }}">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ it.rm }}" hint-size="28px,28px"></x-import>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ ed }}">
+                <div data-noprint="1" style="display:flex;padding-top:8px"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.add }}" hint-size="130px,32px">Add deliverable</x-import></div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isPricing }}">
+            <sc-if value="{{ s.multi }}">
+              <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">{{ s.hint }}</p>
+            </sc-if>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start">
+              <sc-for list="{{ s.options }}" as="o" hint-placeholder-count="2">
+                <div data-keep="1" onClick="{{ o.pick }}" style="background:var(--n-0);border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:14px;cursor:{{ o.cursor }};border:{{ o.border }};box-shadow:{{ o.shadow }};transition:box-shadow 140ms var(--ease-dab), border-color 140ms var(--ease-dab)">
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:28px">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="neutral" hint-size="80px,20px">{{ o.modelLabel }}</x-import>
+                    <sc-if value="{{ o.recommended }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="outline" hint-size="100px,20px">Recommended</x-import>
+                    </sc-if>
+                    <sc-if value="{{ o.selected }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="brand" dot="{{ true }}" hint-size="80px,20px">Selected</x-import>
+                    </sc-if>
+                    <span style="flex:1"></span>
+                    <sc-if value="{{ ed }}">
+                      <div data-noprint="1" style="display:flex;align-items:center;gap:2px">
+                        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ modelOpts }}" value="{{ o.model }}" onChange="{{ o.setModel }}" onClick="{{ stop }}" hint-size="120px,32px"></x-import>
+                        <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="star" label="Toggle recommended" size="sm" variant="ghost" onClick="{{ o.toggleRec }}" hint-size="28px,28px"></x-import>
+                        <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="trash-2" label="Delete option" size="sm" variant="ghost" onClick="{{ o.rm }}" hint-size="28px,28px"></x-import>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <textarea rows="1" value="{{ o.name.v }}" onChange="{{ o.name.on }}" placeholder="{{ ph.option }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-family:var(--font-display);font-weight:800;font-size:40px;line-height:0.92;padding-bottom:0.12em;letter-spacing:-0.012em" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  <textarea rows="1" value="{{ o.summary.v }}" onChange="{{ o.summary.on }}" placeholder="{{ ph.detail }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px;text-wrap:pretty" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;color:var(--ink)">
+                    <span style="display:flex;align-items:center;gap:6px">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Icon" name="clock" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+                      <input value="{{ o.duration.v }}" onChange="{{ o.duration.on }}" placeholder="{{ ph.duration }}" style="field-sizing:content;min-width:2ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                    </span>
+                    <sc-if value="{{ o.isRetainer }}">
+                      <span style="display:flex;align-items:center;gap:6px">
+                        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Icon" name="repeat" size="{{ 16 }}" hint-size="16px,16px"></x-import>
+                        <input type="number" value="{{ o.term.v }}" onChange="{{ o.term.on }}" style="field-sizing:content;min-width:2ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                        <span>month term</span>
+                      </span>
+                    </sc-if>
+                  </div>
+                  <div style="display:flex;flex-direction:column">
+                    <sc-for list="{{ o.items }}" as="it" hint-placeholder-count="4">
+                      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;padding:10px 0;border-top:1px solid var(--border-subtle);align-items:start">
+                        <textarea rows="1" value="{{ it.label.v }}" onChange="{{ it.label.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                        <span style="font-size:14px;font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap">{{ it.amt }}</span>
+                        <sc-if value="{{ it.showNote }}">
+                          <span style="grid-column:1 / -1;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">{{ it.note }}</span>
+                        </sc-if>
+                        <sc-if value="{{ ed }}">
+                          <div data-noprint="1" style="grid-column:1 / -1;display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">
+                            <sc-if value="{{ o.showQty }}">
+                              <input type="number" value="{{ it.qty.v }}" onChange="{{ it.qty.on }}" onClick="{{ stop }}" style="width:5ch;border:1px solid var(--border-default);border-radius:8px;background:var(--n-0);font:inherit;color:var(--ink);padding:3px 6px;outline:none;text-align:right" style-focus="border-color:var(--ink)">
+                              <span>×</span>
+                            </sc-if>
+                            <span>{{ currency }}</span>
+                            <input type="number" value="{{ it.rate.v }}" onChange="{{ it.rate.on }}" onClick="{{ stop }}" style="width:11ch;border:1px solid var(--border-default);border-radius:8px;background:var(--n-0);font:inherit;color:var(--ink);padding:3px 6px;outline:none;text-align:right" style-focus="border-color:var(--ink)">
+                            <span>{{ o.rateUnit }}</span>
+                            <span style="flex:1"></span>
+                            <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="x" label="Remove line" size="sm" variant="ghost" onClick="{{ it.rm }}" hint-size="28px,28px"></x-import>
+                          </div>
+                        </sc-if>
+                      </div>
+                    </sc-for>
+                    <sc-if value="{{ ed }}">
+                      <div data-noprint="1" style="display:flex;padding-top:4px"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ o.addItem }}" hint-size="96px,32px">Add line</x-import></div>
+                    </sc-if>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-top:14px;border-top:2px solid var(--ink)">
+                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">{{ o.totalLabel }}</span>
+                    <span style="font-family:var(--font-display);font-weight:800;font-size:36px;line-height:1;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums">{{ o.total }}</span>
+                  </div>
+                  <sc-if value="{{ o.isRetainer }}">
+                    <span style="font-size:13px;color:var(--text-muted)">{{ o.contract }}</span>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ ed }}">
+              <div data-noprint="1" style="display:flex"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="plus" onClick="{{ s.addOption }}" hint-size="120px,32px">Add option</x-import></div>
+            </sc-if>
+          </sc-if>
+
+          <sc-if value="{{ s.isAddons }}">
+            <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">Tick any you want. They're added to the total.</p>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ s.items }}" as="a" hint-placeholder-count="3">
+                <div data-keep="1" style="display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:6px 16px;align-items:start;padding:16px 0;border-top:1px solid var(--border-subtle)">
+                  <div style="padding-top:2px">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Checkbox" checked="{{ a.selected }}" onChange="{{ a.toggle }}" aria-label="Include add-on" hint-size="20px,20px"></x-import>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+                    <textarea rows="1" value="{{ a.label.v }}" onChange="{{ a.label.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:16px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <textarea rows="1" value="{{ a.detail.v }}" onChange="{{ a.detail.on }}" placeholder="{{ ph.detail }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  </div>
+                  <span style="font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums">{{ a.priceFmt }}</span>
+                  <sc-if value="{{ ed }}">
+                    <div data-noprint="1" style="grid-column:2 / -1;display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);flex-wrap:wrap">
+                      <span>{{ currency }}</span>
+                      <input type="number" value="{{ a.price.v }}" onChange="{{ a.price.on }}" style="width:11ch;border:1px solid var(--border-default);border-radius:8px;background:var(--n-0);font:inherit;color:var(--ink);padding:3px 6px;outline:none;text-align:right" style-focus="border-color:var(--ink)">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Switch" checked="{{ a.recurring }}" onChange="{{ a.toggleRec }}" label="Monthly" hint-size="90px,24px"></x-import>
+                      <span style="flex:1"></span>
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="x" label="Remove add-on" size="sm" variant="ghost" onClick="{{ a.rm }}" hint-size="28px,28px"></x-import>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ ed }}">
+                <div data-noprint="1" style="display:flex;padding-top:8px"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.add }}" hint-size="120px,32px">Add add-on</x-import></div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isSummary }}">
+            <sc-if value="{{ bold }}" hint-placeholder-val="{{ true }}">
+              <div data-keep="1" class="dab-on-ink" style="background:var(--ink);border-radius:26px;padding:32px;display:flex;flex-direction:column;gap:4px">
+                <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--n-700);font-size:15px">
+                    <span style="color:var(--n-200)">{{ r.label }}</span>
+                    <span style="color:var(--paper);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.value }}</span>
+                  </div>
+                </sc-for>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:20px">
+                  <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--paper)">{{ totalLabel }}</span>
+                  <span style="font-family:var(--font-display);font-weight:800;font-size:68px;line-height:0.92;letter-spacing:-0.012em;color:var(--dab-yellow-500);font-variant-numeric:tabular-nums">{{ grandTotal }}</span>
+                </div>
+                <sc-if value="{{ hasExtra }}">
+                  <span style="font-size:14px;color:var(--n-200);text-align:right">{{ extraLine }}</span>
+                </sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ restrained }}">
+              <div data-keep="1" style="display:flex;flex-direction:column;gap:4px">
+                <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--border-subtle);font-size:15px">
+                    <span style="color:var(--text-muted)">{{ r.label }}</span>
+                    <span style="color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.value }}</span>
+                  </div>
+                </sc-for>
+                <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:2px solid var(--ink)">
+                  <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">{{ totalLabel }}</span>
+                  <span style="font-family:var(--font-display);font-weight:800;font-size:56px;line-height:0.92;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums;box-shadow:inset 0 -10px 0 var(--dab-yellow-500)">{{ grandTotal }}</span>
+                </div>
+                <sc-if value="{{ hasExtra }}">
+                  <span style="font-size:14px;color:var(--text-muted);text-align:right;padding-top:8px">{{ extraLine }}</span>
+                </sc-if>
+              </div>
+            </sc-if>
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+          </sc-if>
+
+          <sc-if value="{{ s.isTimeline }}">
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ s.phases }}" as="p" hint-placeholder-count="4">
+                <div data-keep="1" style="display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:4px 20px;align-items:start;padding:16px 0;border-top:1px solid var(--border-subtle)">
+                  <input value="{{ p.when.v }}" onChange="{{ p.when.on }}" placeholder="{{ ph.when }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:var(--ink);padding:2px 0 0;outline:none;border-radius:4px;font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                  <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+                    <textarea rows="1" value="{{ p.label.v }}" onChange="{{ p.label.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:16px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <textarea rows="1" value="{{ p.detail.v }}" onChange="{{ p.detail.on }}" placeholder="{{ ph.detail }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  </div>
+                  <sc-if value="{{ ed }}">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ p.rm }}" hint-size="28px,28px"></x-import>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ ed }}">
+                <div data-noprint="1" style="display:flex;padding-top:8px"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.add }}" hint-size="110px,32px">Add phase</x-import></div>
+              </sc-if>
+            </div>
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+          </sc-if>
+
+          <sc-if value="{{ s.isPayment }}">
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ s.milestones }}" as="m" hint-placeholder-count="3">
+                <div data-keep="1" style="display:grid;grid-template-columns:96px minmax(0,1fr) auto auto;gap:4px 20px;align-items:center;padding:16px 0;border-top:1px solid var(--border-subtle)">
+                  <span style="display:flex;align-items:baseline;font-family:var(--font-display);font-weight:800;font-size:40px;line-height:1;letter-spacing:-0.012em;color:var(--ink)">
+                    <input type="number" value="{{ m.percent.v }}" onChange="{{ m.percent.on }}" style="field-sizing:content;min-width:1ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                    <span>%</span>
+                  </span>
+                  <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+                    <textarea rows="1" value="{{ m.label.v }}" onChange="{{ m.label.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:16px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <input value="{{ m.due.v }}" onChange="{{ m.due.on }}" placeholder="{{ ph.due }}" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;outline:none;border-radius:4px;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+                  </div>
+                  <span style="font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums">{{ m.amt }}</span>
+                  <sc-if value="{{ ed }}">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ m.rm }}" hint-size="28px,28px"></x-import>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ ed }}">
+                <div data-noprint="1" style="display:flex;align-items:center;gap:12px;padding-top:8px">
+                  <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.add }}" hint-size="130px,32px">Add payment</x-import>
+                  <sc-if value="{{ s.showWarn }}">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="warning" dot="{{ true }}" hint-size="120px,20px">{{ s.warn }}</x-import>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+          </sc-if>
+
+          <sc-if value="{{ s.isAssumptions }}">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px">
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">We assume</span>
+                <sc-for list="{{ s.items }}" as="g" hint-placeholder-count="3">
+                  <div style="display:flex;gap:12px;align-items:flex-start">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Icon" name="check" size="{{ 16 }}" style="margin-top:3px;color:var(--ink)" hint-size="16px,16px"></x-import>
+                    <textarea rows="1" value="{{ g.f.v }}" onChange="{{ g.f.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;flex:1;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <sc-if value="{{ ed }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ g.rm }}" hint-size="28px,28px"></x-import>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ ed }}">
+                  <div data-noprint="1" style="display:flex"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.addItem }}" hint-size="90px,32px">Add</x-import></div>
+                </sc-if>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Not included</span>
+                <sc-for list="{{ s.exclusions }}" as="g" hint-placeholder-count="3">
+                  <div style="display:flex;gap:12px;align-items:flex-start">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Icon" name="minus" size="{{ 16 }}" style="margin-top:3px;color:var(--text-muted)" hint-size="16px,16px"></x-import>
+                    <textarea rows="1" value="{{ g.f.v }}" onChange="{{ g.f.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;flex:1;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                    <sc-if value="{{ ed }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ g.rm }}" hint-size="28px,28px"></x-import>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <sc-if value="{{ ed }}">
+                  <div data-noprint="1" style="display:flex"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.addEx }}" hint-size="90px,32px">Add</x-import></div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isTerms }}">
+            <div style="display:flex;flex-direction:column;gap:12px;max-width:680px">
+              <sc-for list="{{ s.items }}" as="g" hint-placeholder-count="4">
+                <div data-keep="1" style="display:flex;gap:16px;align-items:flex-start">
+                  <span style="flex:0 0 24px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding-top:2px">{{ g.n }}</span>
+                  <textarea rows="1" value="{{ g.f.v }}" onChange="{{ g.f.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;flex:1;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px;text-wrap:pretty" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+                  <sc-if value="{{ ed }}">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" data-noprint="1" icon="x" label="Remove" size="sm" variant="ghost" onClick="{{ g.rm }}" hint-size="28px,28px"></x-import>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <sc-if value="{{ ed }}">
+                <div data-noprint="1" style="display:flex"><x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ s.add }}" hint-size="100px,32px">Add term</x-import></div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s.isAcceptance }}">
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:640px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:-12px 0 0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:15px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+            <div data-keep="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;padding:28px;border-radius:26px;border:2px solid var(--ink);box-shadow:{{ accShadow }}">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">You're accepting</span>
+                <span style="font-size:17px;font-weight:600;color:var(--ink)">{{ acceptLine }}</span>
+                <span style="font-family:var(--font-display);font-weight:800;font-size:44px;line-height:1;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums">{{ grandTotal }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Name
+                  <input value="{{ s.name.v }}" onChange="{{ s.name.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                </label>
+                <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Role
+                  <input value="{{ s.role.v }}" onChange="{{ s.role.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                </label>
+                <sc-if value="{{ s.accepted }}">
+                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="success" dot="{{ true }}" hint-size="140px,20px">{{ s.acceptedOn }}</x-import>
+                    <sc-if value="{{ ed }}">
+                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" data-noprint="1" size="sm" variant="ghost" onClick="{{ s.reset }}" hint-size="80px,32px">Reset</x-import>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ s.canAccept }}">
+                  <div data-noprint="1" style="display:flex">
+                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" variant="primary" iconRight="arrow-right" onClick="{{ s.accept }}" hint-size="160px,44px">Accept quote</x-import>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+        </section>
+      </sc-for>
+
+      <footer style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:24px 14mm;border-top:1px solid var(--border-subtle);background:var(--paper);font-size:13px;color:var(--text-muted)">
+        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Logo" lockup="mark" size="{{ 20 }}" tone="ink" hint-size="20px,20px"></x-import>
+        <input value="{{ M.studioEmail.v }}" onChange="{{ M.studioEmail.on }}" placeholder="{{ ph.email }}" style="field-sizing:content;min-width:4ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+        <input value="{{ M.studioPhone.v }}" onChange="{{ M.studioPhone.on }}" placeholder="{{ ph.phone }}" style="field-sizing:content;min-width:4ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+        <input value="{{ M.studioAddress.v }}" onChange="{{ M.studioAddress.on }}" placeholder="{{ ph.address }}" style="field-sizing:content;min-width:4ch;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
+        <span style="flex:1"></span>
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">{{ quoteNumber }}</span>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<sc-if value="{{ shareOpen }}">
+  <div data-noprint="1" class="quote-share-overlay" onClick="{{ closeShare }}">
+    <div class="quote-share-dialog" role="dialog" aria-modal="true" aria-label="Share quote" onClick="{{ stop }}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-family:var(--font-display);font-size:32px;font-weight:800;line-height:1">Share this quote</span>
+          <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">Send a link that opens the client view with this quote and its current pricing.</span>
+        </div>
+        <button type="button" onClick="{{ closeShare }}" aria-label="Close share dialog" style="flex:none;border:0;background:transparent;color:var(--ink);font-size:24px;line-height:1;cursor:pointer">×</button>
+      </div>
+      <label style="display:block;margin:24px 0 8px;font-size:12px;font-weight:600;color:var(--text-muted)">Client link</label>
+      <input class="quote-share-link" value="{{ clientLink }}" readonly onFocus="{{ selectLink }}" aria-label="Client link">
+      <p style="margin:10px 0 20px;font-size:13px;line-height:1.5;color:var(--text-muted)">{{ shareNote }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ink" iconLeft="copy" onClick="{{ copyClientLink }}" hint-size="150px,36px">Copy client link</x-import>
+        <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="eye" onClick="{{ previewClientLink }}" hint-size="115px,36px">Open preview</x-import>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ drawer }}">
+  <div data-noprint="1" style="position:fixed;top:64px;right:0;bottom:0;width:min(560px, 100vw);z-index:50;background:var(--n-0);border-left:2px solid var(--ink);box-shadow:var(--shadow-soft-3);display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--border-subtle)">
+      <div style="display:flex;flex-direction:column;flex:1;gap:2px">
+        <span style="font-size:17px;font-weight:600;color:var(--ink)">Agent JSON</span>
+        <span style="font-size:13px;color:var(--text-muted)">Paste a quote, or copy a link an agent can open and fill.</span>
+      </div>
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="x" label="Close" variant="ghost" onClick="{{ closeDrawer }}" hint-size="36px,36px"></x-import>
+    </div>
+    <div style="display:flex;gap:4px;padding:12px 20px 0">
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ tabJsonVariant }}" onClick="{{ tabJson }}" hint-size="100px,32px">Quote JSON</x-import>
+      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="{{ tabSchemaVariant }}" onClick="{{ tabSchema }}" hint-size="120px,32px">Schema &amp; API</x-import>
+    </div>
+    <sc-if value="{{ tabIsJson }}">
+      <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:12px 20px 20px">
+        <textarea value="{{ draft }}" onChange="{{ onDraft }}" spellcheck="false" style="flex:1;min-height:0;width:100%;box-sizing:border-box;resize:none;border:1px solid var(--border-default);border-radius:12px;background:var(--surface-sunken);font-family:var(--font-mono);font-size:12px;line-height:1.5;color:var(--ink);padding:12px;outline:none" style-focus="border-color:var(--ink)"></textarea>
+        <sc-if value="{{ hasErr }}">
+          <span style="font-size:13px;color:var(--status-danger-fg)">{{ err }}</span>
+        </sc-if>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="primary" iconLeft="check" onClick="{{ applyDraft }}" hint-size="90px,32px">Apply</x-import>
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="copy" onClick="{{ copyJson }}" hint-size="110px,32px">Copy JSON</x-import>
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="link" onClick="{{ copyEditLink }}" hint-size="120px,32px">Edit link</x-import>
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="link" onClick="{{ copyClientLink }}" hint-size="120px,32px">Client link</x-import>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ tabIsSchema }}">
+      <div style="flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:16px 20px 24px;font-size:14px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Open with data</span>
+          <code style="font-family:var(--font-mono);font-size:12px;background:var(--surface-sunken);border-radius:12px;padding:10px 12px;color:var(--ink);word-break:break-all">#json=&lt;encodeURIComponent(JSON)&gt;&amp;mode=client</code>
+          <span style="color:var(--text-muted);font-size:13px">Every edit rewrites the URL as #q=&lt;base64url&gt;, so the address bar is always a full copy of the quote.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">window.DabQuote</span>
+          <sc-for list="{{ apiList }}" as="a" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:6px 0;border-top:1px solid var(--border-subtle);font-size:13px">
+              <code style="font-family:var(--font-mono);font-size:12px;color:var(--ink)">{{ a.sig }}</code>
+              <span style="color:var(--text-muted)">{{ a.does }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="flex:1;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">JSON Schema · quote-schema.json</span>
+            <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="copy" onClick="{{ copySchema }}" hint-size="80px,32px">Copy</x-import>
+          </div>
+          <pre style="margin:0;font-family:var(--font-mono);font-size:11px;line-height:1.5;background:var(--surface-sunken);border-radius:12px;padding:12px;color:var(--ink);white-space:pre-wrap;word-break:break-word">{{ schemaText }}</pre>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}">
+  <div data-noprint="1" style="position:fixed;right:24px;bottom:24px;z-index:60">
+    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Toast" tone="success" title="{{ toast }}" onDismiss="{{ clearToast }}" hint-size="300px,56px"></x-import>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sectionNumbers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;urlSync&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const uid = () => Math.random().toString(36).slice(2, 8);
+const today = () => new Date().toISOString().slice(0, 10);
+const addDays = (d, n) => { const x = new Date(d + 'T00:00:00'); x.setDate(x.getDate() + n); return x.toISOString().slice(0, 10); };
+const clone = o => JSON.parse(JSON.stringify(o));
+const isObj = o => o && typeof o === 'object' && !Array.isArray(o);
+const merge = (a, b) => { if (b === undefined) return a; if (!isObj(a) || !isObj(b)) return b; const r = { ...a }; for (const k in b) r[k] = merge(a[k], b[k]); return r; };
+const getIn = (o, p) => p.reduce((a, k) => (a == null ? a : a[k]), o);
+const setIn = (o, p, v) => { if (!p.length) return v; const [k, ...rest] = p; const c = Array.isArray(o) ? o.slice() : { ...(o || {}) }; c[k] = setIn(o == null ? undefined : o[k], rest, v); return c; };
+const pad = n => String(n).padStart(2, '0');
+const enc = s => btoa(unescape(encodeURIComponent(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const dec = b => decodeURIComponent(escape(atob(b.replace(/-/g, '+').replace(/_/g, '/'))));
+const LS = 'dabdab.quote.v1';
+
+const TYPES = {
+  cover: { label: 'Cover & letter', title: 'A proposal', d: () => ({ intro: '', signoff: 'The dabdab team' }) },
+  overview: { label: 'Project overview', title: "Where we're starting", d: () => ({ body: '', goals: [] }) },
+  scope: { label: 'Scope & deliverables', title: "What we'll build", d: () => ({ items: [] }) },
+  pricing: { label: 'Pricing', title: 'Pricing', d: () => ({ options: [] }) },
+  addons: { label: 'Optional add-ons', title: 'Optional add-ons', d: () => ({ items: [] }) },
+  summary: { label: 'Investment summary', title: 'Investment', d: () => ({ note: '' }) },
+  timeline: { label: 'Timeline & milestones', title: 'Timeline', d: () => ({ phases: [], note: '' }) },
+  payment: { label: 'Payment schedule', title: 'Payment schedule', d: () => ({ milestones: [], note: '' }) },
+  assumptions: { label: 'Assumptions & exclusions', title: 'Assumptions', d: () => ({ items: [], exclusions: [] }) },
+  terms: { label: 'Terms & conditions', title: 'Terms', d: () => ({ items: [] }) },
+  acceptance: { label: 'Acceptance & signature', title: 'Sign and start', d: () => ({ note: '', signer: { name: '', role: '', date: '', accepted: false } }) },
+};
+const MODELS = { fixed: 'Fixed price', milestone: 'Milestones', retainer: 'Retainer' };
+
+const TEMPLATES = {
+  website: () => ({
+    meta: { number: 'SAMPLE-001', issuedOn: today(), validUntil: addDays(today(), 30), status: 'draft' },
+    client: { name: 'Example client', contact: '', email: '', address: '' },
+    studio: { name: 'dabdab', address: 'Kathmandu, Nepal' },
+    settings: { currency: 'NPR', theme: 'restrained', discount: 0, taxes: [{ label: 'VAT', rate: 13 }] },
+    sections: [
+      { type: 'cover', title: 'A new website, two ways to build it', intro: 'Thank you for walking us through the new website.\n\nBelow are two ways to build it. Option A runs on WordPress and ships in four weeks, with editing your team already knows. Option B is a Next.js build with a custom CMS, on an architecture that scales as your programmes and content grow.\n\nPick the one that fits and we start the week you sign.', signoff: 'The dabdab team' },
+      { type: 'overview', title: "Where we're starting", body: 'The client needs a website that explains its programmes clearly, lets the team publish news and events without a developer, and holds up as content and traffic grow.', goals: ['Clear programme and impact pages', 'Self-serve publishing for news, events and reports', 'Fast on mobile connections'] },
+      { type: 'scope', title: "What we'll build", items: [
+        { title: 'Discovery and sitemap', detail: 'Stakeholder workshop, content audit, sitemap and page inventory.' },
+        { title: 'UI and UX design', detail: 'Responsive designs for every key template. Two revision rounds.' },
+        { title: 'Development', detail: 'Build on the chosen stack with reusable content blocks.' },
+        { title: 'CMS setup', detail: 'Editing for news, events, programmes and reports, plus one training session.' },
+        { title: 'QA and launch', detail: 'Device and browser testing, performance pass, go-live support.' } ] },
+      { type: 'pricing', title: 'Two ways to build it', options: [
+        { id: 'wp', name: 'WordPress', summary: 'WordPress site with the WordPress CMS. Familiar editing, quickest to launch.', duration: '4 weeks', model: 'fixed', items: [
+          { label: 'Discovery and sitemap', qty: 1, rate: 5000 }, { label: 'UI and UX design', qty: 1, rate: 15000 }, { label: 'WordPress theme development', qty: 1, rate: 25000 }, { label: 'CMS setup and training', qty: 1, rate: 5000 }, { label: 'QA and launch', qty: 1, rate: 5000 } ] },
+        { id: 'next', name: 'Next.js + custom CMS', summary: 'Next.js front end and a custom CMS on a highly scalable architecture.', duration: '8 weeks', model: 'fixed', recommended: true, items: [
+          { label: 'Discovery and architecture', qty: 1, rate: 8000 }, { label: 'UI and UX design', qty: 1, rate: 17000 }, { label: 'Next.js front-end build', qty: 1, rate: 25000 }, { label: 'Custom CMS and API', qty: 1, rate: 22000 }, { label: 'Infrastructure, QA and launch', qty: 1, rate: 8000 } ] } ] },
+      { type: 'addons', items: [
+        { label: 'Care plan', detail: 'Hosting management, updates, backups and security patches.', price: 5000, recurring: true },
+        { label: 'Content migration', detail: 'Move existing pages, posts and media into the new CMS.', price: 8000 },
+        { label: 'Nepali language version', detail: 'Bilingual setup with a language switcher.', price: 12000 } ] },
+      { type: 'summary', note: '' },
+      { type: 'timeline', title: 'Four weeks, start to shipped', phases: [
+        { when: 'Week 1', label: 'Discovery and design direction', detail: 'Workshop, sitemap, first design concepts.' },
+        { when: 'Week 2', label: 'Designs and sign-off', detail: 'All key templates designed and approved.' },
+        { when: 'Week 3', label: 'Build and CMS', detail: 'Development, content blocks, CMS setup.' },
+        { when: 'Week 4', label: 'QA, training and launch', detail: 'Testing, team training, go-live.' } ], note: 'Shown for the WordPress option. The Next.js option runs the same phases over eight weeks.' },
+      { type: 'payment', milestones: [ { label: 'On signing', percent: 50, due: 'Before kickoff' }, { label: 'On design sign-off', percent: 30, due: 'End of design phase' }, { label: 'On launch', percent: 20, due: 'Within 7 days of go-live' } ], note: 'Invoices are due within 7 days.' },
+      { type: 'assumptions', title: 'What we assume', items: ['You provide final copy, images and logos before build starts.', 'One point of contact approves each stage.', 'Hosting and domain are in your name. We help set them up.'], exclusions: ['Copywriting and photography', 'Paid plugins, themes or third-party licences', 'Ongoing maintenance, unless the care plan is added'] },
+      { type: 'terms', items: ['This quote is valid until the date on the cover.', 'Two revision rounds are included at each design stage. Further rounds are billed separately.', 'Source code and design files transfer to you on final payment.', "Either side can end the engagement with 14 days' written notice. Completed work is billed.", 'Prices are shown before tax. Tax is added at the rate shown in the summary.'] },
+      { type: 'acceptance', note: "Sign below to accept the selected option and add-ons. We'll send the first invoice and book the kickoff." },
+    ],
+  }),
+  retainer: () => ({
+    meta: { number: 'DAB-2026-015', issuedOn: today(), validUntil: addDays(today(), 30) },
+    client: { name: 'Client name' },
+    settings: { currency: 'USD', theme: 'restrained', discount: 0, taxes: [] },
+    sections: [
+      { type: 'cover', title: 'Your product team, on retainer', intro: 'A monthly retainer gives you a standing design and engineering team. We plan each month with you, ship against the plan, and report on what shipped.' },
+      { type: 'scope', title: "What's in each month", items: [ { title: 'Product design', detail: 'Research, flows and high-fidelity UI.' }, { title: 'Engineering', detail: 'Front end, backend and infrastructure work.' }, { title: 'Planning and reporting', detail: 'Monthly planning call and a written ship report.' } ] },
+      { type: 'pricing', title: 'Monthly fee', options: [ { name: 'Studio retainer', summary: 'A fixed monthly block of design and engineering time.', duration: 'Monthly', model: 'retainer', term: 6, items: [ { label: 'Product design, 40 hours', qty: 1, rate: 2400 }, { label: 'Engineering, 60 hours', qty: 1, rate: 3600 }, { label: 'Planning and reporting', qty: 1, rate: 400 } ] } ] },
+      { type: 'summary' },
+      { type: 'payment', milestones: [ { label: 'Monthly, in advance', percent: 100, due: 'Invoiced on the 1st, due in 7 days' } ] },
+      { type: 'terms', items: ['Unused hours do not roll over.', "Either side can end the retainer with 30 days' written notice.", 'Work shipped each month is yours on payment.'] },
+      { type: 'acceptance', note: 'Sign below to start the retainer.' },
+    ],
+  }),
+  blank: () => ({
+    meta: { number: '', issuedOn: today(), validUntil: addDays(today(), 30) },
+    sections: [
+      { type: 'cover', title: '', intro: '' },
+      { type: 'pricing', options: [ { name: 'Option name', items: [ { label: '', qty: 1, rate: 0 } ] } ] },
+      { type: 'summary' },
+      { type: 'terms', items: [] },
+      { type: 'acceptance' },
+    ],
+  }),
+};
+
+const API = [
+  ['get()', 'Current quote'], ['set(quote)', 'Replace the whole quote'], ['patch(partial)', 'Deep-merge; arrays replace'],
+  ['addSection(type, data?, index?)', 'Insert a section, returns id'], ['updateSection(idOrType, partial)', 'Merge into one section'],
+  ['removeSection(idOrType)', 'Delete a section'], ['select(optionId)', 'Choose a pricing option'], ['totals()', 'Computed money'],
+  ['setMode("edit" | "client")', 'Switch view'], ['loadTemplate(name)', 'website · retainer · blank'], ['shareUrl(mode?)', 'Link to this exact quote'],
+  ['schema · types', 'JSON Schema and section types'],
+];
+
+class Component extends DCLogic {
+  state = this.boot();
+
+  boot() {
+    let q = null, mode = 'edit', sharedClient = false;
+    try {
+      const h = new URLSearchParams(location.hash.slice(1));
+      if (h.get('q')) q = JSON.parse(dec(h.get('q')));
+      else if (h.get('json')) q = JSON.parse(h.get('json'));
+      if (h.get('mode') === 'client') mode = 'client';
+      sharedClient = mode === 'client' && h.get('shared') === '1';
+    } catch (e) { console.warn('Could not read quote from URL', e); }
+    if (!q) { try { const s = localStorage.getItem(LS); if (s) q = JSON.parse(s); } catch (e) {} }
+    if (!q) q = TEMPLATES.website();
+    return { q: this.normalize(q), mode, sharedClient, printMode: false, shareOpen: false, drawer: false, tab: 'json', draft: '', err: '', toast: '', schema: '' };
+  }
+
+  normalize(q) {
+    q = q || {};
+    const base = { schema: 'dabdab.quote/v1', meta: { number: '', issuedOn: today(), validUntil: addDays(today(), 30), status: 'draft' }, client: { name: '', contact: '', email: '', address: '' }, studio: { name: 'dabdab', email: '', phone: '', address: '', website: '' }, settings: { currency: 'NPR', theme: 'restrained', discount: 0, taxes: [{ label: 'VAT', rate: 13 }] }, selection: { option: null } };
+    const r = merge(base, { ...q, sections: undefined });
+    r.settings.taxes = (Array.isArray(r.settings.taxes) ? r.settings.taxes : []).map(t => ({ label: String(t.label ?? 'Tax'), rate: +t.rate || 0 }));
+    r.settings.discount = +r.settings.discount || 0;
+    const ids = (arr, def) => (Array.isArray(arr) ? arr : []).map(x => ({ ...def, ...x, id: x.id || uid() }));
+    r.sections = (Array.isArray(q.sections) ? q.sections : []).filter(s => s && TYPES[s.type]).map(s => {
+      const T = TYPES[s.type];
+      const n = { ...T.d(), ...s, id: s.id || uid(), enabled: s.enabled !== false, title: s.title ?? T.title };
+      if (s.type === 'scope') n.items = ids(n.items, { title: '', detail: '' });
+      if (s.type === 'pricing') n.options = ids(n.options, { name: '', summary: '', duration: '', model: 'fixed', term: 12, recommended: false }).map(o => ({ ...o, model: MODELS[o.model] ? o.model : 'fixed', items: ids(o.items, { label: '', qty: 1, rate: 0 }).map(it => ({ ...it, qty: it.qty === undefined ? 1 : +it.qty || 0, rate: +it.rate || 0 })) }));
+      if (s.type === 'addons') n.items = ids(n.items, { label: '', detail: '', price: 0, recurring: false, selected: false }).map(a => ({ ...a, price: +a.price || 0 }));
+      if (s.type === 'timeline') n.phases = ids(n.phases, { when: '', label: '', detail: '' });
+      if (s.type === 'payment') n.milestones = ids(n.milestones, { label: '', percent: 0, due: '' }).map(m => ({ ...m, percent: +m.percent || 0 }));
+      ['goals', 'exclusions'].forEach(k => { if (k in n) n[k] = (n[k] || []).map(String); });
+      if (s.type === 'assumptions' || s.type === 'terms') n.items = (n.items || []).map(String);
+      if (s.type === 'acceptance') n.signer = { name: '', role: '', date: '', accepted: false, ...(s.signer || {}) };
+      return n;
+    });
+    const opts = this.options(r);
+    if (!opts.find(o => o.id === r.selection.option)) r.selection.option = (opts.find(o => o.recommended) || opts[0] || {}).id || null;
+    return r;
+  }
+
+  sec(q, type) { return q.sections.find(s => s.enabled && s.type === type); }
+  options(q) { const p = q.sections.find(s => s.enabled && s.type === 'pricing'); return p ? p.options : []; }
+  optTotal(o) { return o ? o.items.reduce((a, it) => a + (+it.qty || 0) * (+it.rate || 0), 0) : 0; }
+
+  fmt(n, cur) {
+    this._f = this._f || {};
+    if (!this._f[cur]) { try { this._f[cur] = new Intl.NumberFormat(cur === 'NPR' || cur === 'INR' ? 'en-IN' : 'en-US', { style: 'currency', currency: cur, currencyDisplay: 'code', maximumFractionDigits: 0 }); } catch (e) { this._f[cur] = { format: v => cur + ' ' + Math.round(v).toLocaleString() }; } }
+    return this._f[cur].format(Math.round(n || 0)).replace(/\u00a0/g, ' ');
+  }
+
+  compute(q) {
+    const opts = this.options(q);
+    const opt = opts.find(o => o.id === q.selection.option) || opts[0] || null;
+    const ret = !!opt && opt.model === 'retainer';
+    const ad = this.sec(q, 'addons');
+    const sel = ad ? ad.items.filter(a => a.selected) : [];
+    const oneOff = sel.filter(a => !a.recurring).reduce((s, a) => s + a.price, 0);
+    const monthly = sel.filter(a => a.recurring).reduce((s, a) => s + a.price, 0);
+    const sub = this.optTotal(opt);
+    const addIn = ret ? monthly : oneOff;
+    const extra = ret ? oneOff : monthly;
+    const base = sub + addIn;
+    const disc = base * (q.settings.discount || 0) / 100;
+    const taxable = base - disc;
+    const taxes = q.settings.taxes.map(t => ({ ...t, amt: taxable * t.rate / 100 }));
+    const total = taxable + taxes.reduce((s, t) => s + t.amt, 0);
+    return { opt, optId: opt && opt.id, ret, sub, addIn, extra, disc, taxes, total, per: ret ? ' / month' : '', term: ret ? (+opt.term || 0) : 0 };
+  }
+
+  upd(path, fn) { this.setState(s => ({ q: setIn(s.q, path, fn(getIn(s.q, path))) })); }
+  set(path, v) { this.upd(path, () => v); }
+  move(i, d) { this.upd(['sections'], a => { const j = i + d; if (j < 0 || j >= a.length) return a; const b = a.slice(); [b[i], b[j]] = [b[j], b[i]]; return b; }); }
+  findIdx(q, key) { return q.sections.findIndex(s => s.id === key || s.type === key); }
+  replace(q) { this.setState({ q: this.normalize(q) }); }
+  showToast(t) { clearTimeout(this._tt); this.setState({ toast: t }); this._tt = setTimeout(() => this.setState({ toast: '' }), 2400); }
+  hashFor(q, mode, shared = false) { return '#q=' + enc(JSON.stringify(q)) + (mode === 'client' ? '&mode=client' : '') + (shared ? '&shared=1' : ''); }
+  shareUrl(mode) {
+    let base = location.href.split('#')[0];
+    try { if (window.parent !== window && window.parent.location.origin === location.origin) base = window.parent.location.href.split('#')[0]; } catch (e) {}
+    return base + this.hashFor(this.state.q, mode, mode === 'client');
+  }
+  copy(text, msg) {
+    const done = () => this.showToast(msg);
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => this.fallbackCopy(text, done));
+    else this.fallbackCopy(text, done);
+  }
+  fallbackCopy(text, done) { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); done(); }
+  loadTemplate(name) { if (TEMPLATES[name]) { this.replace(TEMPLATES[name]()); this.showToast('Template loaded'); } }
+
+  queuePagination() {
+    clearTimeout(this._pageTimer);
+    this._pageTimer = setTimeout(() => requestAnimationFrame(() => this.paginate()), 30);
+  }
+
+  paginate() {
+    if (this._isPaginating) return;
+    const sheet = document.querySelector('[data-sheet]');
+    if (!sheet) return;
+    this._isPaginating = true;
+    try {
+      for (const { el, value, priority } of this._pageShifts || []) {
+        if (value) el.style.setProperty('margin-top', value, priority);
+        else el.style.removeProperty('margin-top');
+        delete el.dataset.pageShift;
+      }
+      this._pageShifts = [];
+      sheet.style.removeProperty('min-height');
+      const pageHeight = sheet.getBoundingClientRect().width * 297 / 210;
+      if (!pageHeight) return;
+      const inset = pageHeight * 14 / 297;
+      const sheetTop = sheet.getBoundingClientRect().top;
+      const blocks = sheet.querySelectorAll(':scope > section > *, :scope > section [data-keep], :scope > footer');
+      for (const el of blocks) {
+        if (el.closest('[data-noprint]')) continue;
+        const rect = el.getBoundingClientRect();
+        if (!rect.height || rect.height > pageHeight - 2 * inset) continue;
+        const top = rect.top - sheetTop;
+        const page = Math.max(0, Math.floor((top + 0.25) / pageHeight));
+        const pageStart = page * pageHeight;
+        const pageEnd = (page + 1) * pageHeight;
+        const isHeading = el.parentElement?.matches('section') && el.parentElement.firstElementChild === el;
+        const following = isHeading ? el.nextElementSibling : null;
+        const nextBlock = isHeading ? el.parentElement.querySelector('[data-keep]') : null;
+        const nextHeight = Math.max(following?.getBoundingClientRect().height || 0, nextBlock?.getBoundingClientRect().height || 0);
+        const reserve = isHeading ? Math.min(nextHeight + pageHeight * 12 / 297, pageHeight * 150 / 297) : 0;
+        let shift = page > 0 && top < pageStart + inset ? pageStart + inset - top : 0;
+        if (top + shift + rect.height + reserve > pageEnd - inset) shift = pageEnd + inset - top;
+        if (shift > 0.5) {
+          const value = el.style.getPropertyValue('margin-top');
+          const priority = el.style.getPropertyPriority('margin-top');
+          const current = parseFloat(getComputedStyle(el).marginTop) || 0;
+          this._pageShifts.push({ el, value, priority });
+          el.style.setProperty('margin-top', (current + shift).toFixed(2) + 'px');
+          el.dataset.pageShift = '1';
+        }
+      }
+      const last = sheet.lastElementChild;
+      const bottom = last ? last.getBoundingClientRect().bottom - sheetTop : 0;
+      const pages = Math.max(1, Math.ceil((bottom + inset - 0.5) / pageHeight));
+      sheet.style.setProperty('min-height', (pages * pageHeight).toFixed(2) + 'px');
+      sheet.dataset.pageCount = String(pages);
+    } finally {
+      this._isPaginating = false;
+    }
+  }
+
+  componentDidMount() {
+    fetch('quote-schema.json').then(r => r.text()).then(t => { this.setState({ schema: t }); try { this._schemaObj = JSON.parse(t); } catch (e) {} }).catch(() => {});
+    this._onHash = () => { if (location.hash === this._lastHash) return; const s = this.boot(); this.setState({ q: s.q, mode: s.mode, sharedClient: s.sharedClient }); };
+    window.addEventListener('hashchange', this._onHash);
+    const self = this;
+    window.DabQuote = {
+      get: () => clone(self.state.q),
+      set: q => { self.replace(q); return true; },
+      patch: p => { self.replace(merge(clone(self.state.q), p)); return true; },
+      addSection: (type, data = {}, index) => { if (!TYPES[type]) throw new Error('Unknown section type: ' + type + '. Use one of ' + Object.keys(TYPES).join(', ')); const q = clone(self.state.q); const id = data.id || uid(); const s = { ...data, type, id }; if (index == null) q.sections.push(s); else q.sections.splice(index, 0, s); self.replace(q); return id; },
+      updateSection: (key, p) => { const q = clone(self.state.q); const i = self.findIdx(q, key); if (i < 0) throw new Error('No section ' + key); q.sections[i] = merge(q.sections[i], p); self.replace(q); return q.sections[i].id; },
+      removeSection: key => { const q = clone(self.state.q); const i = self.findIdx(q, key); if (i < 0) return false; q.sections.splice(i, 1); self.replace(q); return true; },
+      select: id => { self.set(['selection', 'option'], id); return true; },
+      totals: () => { const c = self.compute(self.state.q); return { currency: self.state.q.settings.currency, option: c.optId, subtotal: c.sub, addons: c.addIn, discount: c.disc, taxes: c.taxes, total: c.total, recurring: c.ret, extra: c.extra }; },
+      setMode: m => { if (self.state.sharedClient && m === 'edit') return false; self.setState({ mode: m === 'client' ? 'client' : 'edit' }); return true; },
+      setTheme: t => self.set(['settings', 'theme'], t === 'restrained' ? 'restrained' : 'bold'),
+      loadTemplate: n => self.loadTemplate(n),
+      shareUrl: m => self.shareUrl(m),
+      get schema() { return self._schemaObj || null; },
+      types: Object.keys(TYPES),
+    };
+    if (window.parent !== window) window.parent.postMessage({ type: 'quote_ready' }, window.location.origin);
+    document.documentElement.setAttribute('data-quote-ready', '1');
+    this._afterPrint = () => { this.setState({ mode: this._prevMode || this.state.mode, printMode: false }); this._prevMode = null; this._printPending = false; this.queuePagination(); };
+    window.addEventListener('afterprint', this._afterPrint);
+    this._onResize = () => this.queuePagination();
+    window.addEventListener('resize', this._onResize);
+    if (document.fonts?.ready) document.fonts.ready.then(() => this.queuePagination());
+    this.queuePagination();
+  }
+
+  componentWillUnmount() { clearTimeout(this._pageTimer); window.removeEventListener('hashchange', this._onHash); window.removeEventListener('afterprint', this._afterPrint); window.removeEventListener('resize', this._onResize); }
+
+  componentDidUpdate() {
+    this.queuePagination();
+    if (this._seenQ !== this.state.q || this._seenMode !== this.state.mode) {
+      this._seenQ = this.state.q; this._seenMode = this.state.mode;
+      clearTimeout(this._st);
+      this._st = setTimeout(() => {
+        try { localStorage.setItem(LS, JSON.stringify(this.state.q)); } catch (e) {}
+        if (this.props.urlSync !== false) { const h = this.hashFor(this.state.q, this.state.mode, this.state.sharedClient); this._lastHash = h; try { history.replaceState(null, '', h); } catch (e) {} }
+      }, 250);
+    }
+  }
+
+  renderVals() {
+    const { q, mode } = this.state;
+    const ed = mode === 'edit';
+    const bold = q.settings.theme !== 'restrained' && !this.state.printMode;
+    const cur = q.settings.currency;
+    const fm = n => this.fmt(n, cur);
+    const c = this.compute(q);
+    const F = (path, o = {}) => { const v = getIn(q, path); return { v: v == null ? '' : v, on: e => { if (!ed && !o.client) return; const raw = e.target.value; this.set(path, o.num ? (raw === '' ? 0 : +raw) : raw); } };};
+    const rmAt = (path, j) => e => { if (e && e.stopPropagation) e.stopPropagation(); this.upd(path, a => a.filter((_, k) => k !== j)); };
+    const addTo = (path, mk) => e => { if (e && e.stopPropagation) e.stopPropagation(); this.upd(path, a => [...(a || []), mk()]); };
+    const opts = this.options(q);
+    const multi = opts.length > 1;
+
+    const vis = q.sections.map((s, i) => [s, i]).filter(([s]) => s.enabled);
+    const sections = vis.map(([s, i], n) => {
+      const P = ['sections', i], T = TYPES[s.type];
+      const vm = { id: s.id, num: pad(n + 1), label: T.label, title: F([...P, 'title']), showHead: s.type !== 'cover', pad: s.type === 'cover' ? '0' : '12mm 14mm', bt: n === 0 ? '0' : '1px solid var(--border-subtle)' };
+      vm['is' + s.type[0].toUpperCase() + s.type.slice(1)] = true;
+      const list = key => (s[key] || []).map((_, j) => ({ f: F([...P, key, j]), rm: rmAt([...P, key], j), n: pad(j + 1) }));
+      switch (s.type) {
+        case 'cover': Object.assign(vm, { intro: F([...P, 'intro']), signoff: F([...P, 'signoff']) }); break;
+        case 'overview': Object.assign(vm, { body: F([...P, 'body']), goals: list('goals'), addGoal: addTo([...P, 'goals'], () => '') }); break;
+        case 'scope':
+          vm.items = s.items.map((it, j) => ({ t: F([...P, 'items', j, 'title']), d: F([...P, 'items', j, 'detail']), rm: rmAt([...P, 'items'], j), n: pad(j + 1) }));
+          vm.add = addTo([...P, 'items'], () => ({ id: uid(), title: '', detail: '' })); break;
+        case 'pricing':
+          vm.multi = s.options.length > 1;
+          vm.hint = 'Choose one option. The summary and payment schedule update to match.';
+          vm.options = s.options.map((o, j) => {
+            const OP = [...P, 'options', j], sel = o.id === c.optId, ret = o.model === 'retainer', tot = this.optTotal(o), m = s.options.length > 1;
+            const strong = !m || sel;
+            return {
+              name: F([...OP, 'name']), summary: F([...OP, 'summary']), duration: F([...OP, 'duration']), term: F([...OP, 'term'], { num: 1 }),
+              isRetainer: ret, model: o.model, modelLabel: MODELS[o.model], showQty: o.model === 'fixed', rateUnit: ret ? '/ month' : '',
+              setModel: e => this.set([...OP, 'model'], e.target.value),
+              recommended: !!o.recommended, selected: m && sel,
+              toggleRec: e => { e.stopPropagation(); this.upd([...P, 'options'], a => a.map((x, k) => ({ ...x, recommended: k === j ? !x.recommended : false }))); },
+              pick: () => { if (m && !sel) this.set(['selection', 'option'], o.id); },
+              cursor: m ? 'pointer' : 'default',
+              border: strong ? '2px solid var(--ink)' : '2px solid var(--border-subtle)',
+              shadow: bold && strong ? 'var(--shadow-sticker)' : 'none',
+              rm: rmAt([...P, 'options'], j),
+              items: o.items.map((it, k) => { const IP = [...OP, 'items', k]; return { label: F([...IP, 'label']), qty: F([...IP, 'qty'], { num: 1 }), rate: F([...IP, 'rate'], { num: 1 }), amt: fm(it.qty * it.rate), rm: rmAt([...OP, 'items'], k), showNote: !ed && o.model === 'fixed' && it.qty !== 1, note: it.qty + ' × ' + fm(it.rate) }; }),
+              addItem: addTo([...OP, 'items'], () => ({ id: uid(), label: '', qty: 1, rate: 0 })),
+              totalLabel: ret ? 'Per month' : 'Option total',
+              total: fm(tot),
+              contract: ret ? fm(tot) + ' × ' + (o.term || 0) + ' months = ' + fm(tot * (o.term || 0)) + ' before tax' : '',
+            };
+          });
+          vm.addOption = addTo([...P, 'options'], () => ({ id: uid(), name: 'New option', summary: '', duration: '', model: 'fixed', term: 12, recommended: false, items: [{ id: uid(), label: '', qty: 1, rate: 0 }] })); break;
+        case 'addons':
+          vm.items = s.items.map((a, j) => { const AP = [...P, 'items', j]; return { label: F([...AP, 'label']), detail: F([...AP, 'detail']), price: F([...AP, 'price'], { num: 1 }), priceFmt: fm(a.price) + (a.recurring ? ' / month' : ''), selected: !!a.selected, toggle: e => this.set([...AP, 'selected'], e.target.checked), recurring: !!a.recurring, toggleRec: e => this.set([...AP, 'recurring'], e.target.checked), rm: rmAt([...P, 'items'], j) }; });
+          vm.add = addTo([...P, 'items'], () => ({ id: uid(), label: '', detail: '', price: 0, recurring: false, selected: false })); break;
+        case 'summary': vm.note = F([...P, 'note']); break;
+        case 'timeline':
+          vm.phases = s.phases.map((p, j) => ({ when: F([...P, 'phases', j, 'when']), label: F([...P, 'phases', j, 'label']), detail: F([...P, 'phases', j, 'detail']), rm: rmAt([...P, 'phases'], j) }));
+          vm.note = F([...P, 'note']); vm.add = addTo([...P, 'phases'], () => ({ id: uid(), when: '', label: '', detail: '' })); break;
+        case 'payment': {
+          const sum = s.milestones.reduce((a, m) => a + m.percent, 0);
+          vm.milestones = s.milestones.map((m, j) => ({ label: F([...P, 'milestones', j, 'label']), percent: F([...P, 'milestones', j, 'percent'], { num: 1 }), due: F([...P, 'milestones', j, 'due']), amt: fm(c.total * m.percent / 100) + c.per, rm: rmAt([...P, 'milestones'], j) }));
+          vm.showWarn = sum !== 100; vm.warn = 'Adds up to ' + sum + '%';
+          vm.note = F([...P, 'note']); vm.add = addTo([...P, 'milestones'], () => ({ id: uid(), label: '', percent: 0, due: '' })); break; }
+        case 'assumptions':
+          vm.items = list('items'); vm.exclusions = list('exclusions');
+          vm.addItem = addTo([...P, 'items'], () => ''); vm.addEx = addTo([...P, 'exclusions'], () => ''); break;
+        case 'terms': vm.items = list('items'); vm.add = addTo([...P, 'items'], () => ''); break;
+        case 'acceptance': {
+          const sg = s.signer || {};
+          Object.assign(vm, {
+            note: F([...P, 'note']), name: F([...P, 'signer', 'name'], { client: 1 }), role: F([...P, 'signer', 'role'], { client: 1 }),
+            accepted: !!sg.accepted, canAccept: !sg.accepted, acceptedOn: 'Accepted ' + (sg.date || ''),
+            accept: () => { const nm = (getIn(this.state.q, [...P, 'signer', 'name']) || '').trim(); if (!nm) { this.showToast('Add your name to accept.'); return; } this.upd([...P, 'signer'], x => ({ ...x, accepted: true, date: today() })); this.set(['meta', 'status'], 'accepted'); this.showToast('Accepted'); },
+            reset: () => this.upd([...P, 'signer'], x => ({ ...x, accepted: false, date: '' })),
+          }); break; }
+      }
+      return vm;
+    });
+
+    const sumRows = [];
+    if (c.opt) sumRows.push({ label: multi ? c.opt.name || 'Selected option' : (c.opt.name || 'Subtotal'), value: fm(c.sub) + c.per });
+    if (c.addIn) sumRows.push({ label: 'Add-ons', value: fm(c.addIn) + c.per });
+    if (c.disc) sumRows.push({ label: 'Discount (' + q.settings.discount + '%)', value: '− ' + fm(c.disc) });
+    c.taxes.forEach(t => sumRows.push({ label: t.label + ' (' + t.rate + '%)', value: fm(t.amt) }));
+    const extraLine = c.extra ? (c.ret ? 'Plus ' + fm(c.extra) + ' one-off add-ons, before tax' : 'Plus ' + fm(c.extra) + ' / month for recurring add-ons, before tax') : (c.ret && c.term ? fm(c.total) + ' × ' + c.term + ' months = ' + fm(c.total * c.term) : '');
+    const totals = opts.map(o => this.optTotal(o));
+    const ph = ed ? { title: 'Section title', client: 'Client name', contact: 'Contact person', address: 'Address', number: 'Quote number', intro: 'Write the intro letter…', signoff: 'Sign-off', body: 'Describe the project…', item: 'Add text', detail: 'Details', note: 'Optional note', option: 'Option name', duration: 'Duration', when: 'When', due: 'When it is due', email: 'Studio email', phone: 'Phone' } : {};
+    const hov = ed ? 'var(--alpha-ink-04)' : 'transparent';
+
+    return {
+      ed, bold, restrained: !bold, ownerView: !this.state.sharedClient, sharedClient: this.state.sharedClient, nums: this.props.sectionNumbers !== false,
+      hov, foc: ed ? 'var(--dab-yellow-50)' : 'transparent', hovInk: ed ? 'var(--alpha-ink-08)' : 'transparent',
+      h2: bold ? '64px' : '52px', ph, stop: e => e.stopPropagation(),
+      sections, sumRows, grandTotal: fm(c.total) + c.per, totalLabel: c.ret ? 'Monthly total' : 'Total', hasExtra: !!extraLine, extraLine,
+      acceptLine: c.opt ? (c.opt.name || 'This quote') + (c.addIn ? ' + add-ons' : '') : 'This quote',
+      accShadow: bold ? 'var(--shadow-sticker)' : 'none',
+      coverPriceLabel: multi ? 'From' : (c.ret ? 'Per month' : 'Total'),
+      coverPrice: multi ? fm(Math.min(...totals)) : fm(c.total) + c.per,
+      quoteNumber: q.meta.number || 'Draft', clientLabel: q.client.name || 'Untitled client',
+      M: { number: F(['meta', 'number']), valid: F(['meta', 'validUntil']), clientName: F(['client', 'name']), clientContact: F(['client', 'contact']), clientAddress: F(['client', 'address']), studioEmail: F(['studio', 'email']), studioPhone: F(['studio', 'phone']), studioAddress: F(['studio', 'address']) },
+      modelOpts: Object.entries(MODELS).map(([value, label]) => ({ value, label })),
+      editVariant: ed ? 'ink' : 'ghost', clientVariant: ed ? 'ghost' : 'ink',
+      toEdit: () => this.setState({ mode: 'edit' }), toClient: () => this.setState({ mode: 'client' }),
+      doPrint: () => { if (this._printPending) return; this._printPending = true; this._prevMode = this.state.mode; this.setState({ mode: 'client', printMode: true, shareOpen: false, drawer: false }); setTimeout(() => requestAnimationFrame(() => { this.paginate(); window.print(); }), 300); },
+      outline: q.sections.map((s, i) => ({ hover: this.state.hoverRow === s.id, enter: () => this.setState({ hoverRow: s.id }), leave: () => this.setState(st => st.hoverRow === s.id ? { hoverRow: null } : null), label: TYPES[s.type].label, title: s.title || '—', enabled: s.enabled, op: s.enabled ? 1 : 0.45, toggle: e => this.set(['sections', i, 'enabled'], e.target.checked), up: () => this.move(i, -1), down: () => this.move(i, 1), rm: () => this.upd(['sections'], a => a.filter((_, k) => k !== i)), jump: () => { const el = document.getElementById(s.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } })),
+      addOpts: [{ value: '', label: 'Add a section…' }, ...Object.entries(TYPES).map(([value, t]) => ({ value, label: t.label }))],
+      addSection: e => { const t = e.target.value; if (!TYPES[t]) return; const qq = clone(this.state.q); const accIdx = qq.sections.findIndex(x => x.type === 'acceptance'); const s = { type: t, id: uid() }; if (accIdx >= 0 && t !== 'acceptance') qq.sections.splice(accIdx, 0, s); else qq.sections.push(s); this.replace(qq); },
+      templateOpts: [{ value: '', label: 'Choose a template…' }, { value: 'website', label: 'Website, two options' }, { value: 'retainer', label: 'Monthly retainer' }, { value: 'blank', label: 'Blank quote' }],
+      pickTemplate: e => this.loadTemplate(e.target.value),
+      boldVariant: bold ? 'ink' : 'ghost', restrainedVariant: bold ? 'ghost' : 'ink',
+      setBold: () => this.set(['settings', 'theme'], 'bold'), setRestrained: () => this.set(['settings', 'theme'], 'restrained'),
+      currency: cur, currencyOpts: ['NPR', 'USD', 'EUR', 'GBP', 'INR', 'AUD', 'CAD', 'SGD', 'AED'].concat(['NPR', 'USD', 'EUR', 'GBP', 'INR', 'AUD', 'CAD', 'SGD', 'AED'].includes(cur) ? [] : [cur]),
+      setCurrency: e => this.set(['settings', 'currency'], e.target.value),
+      discount: F(['settings', 'discount'], { num: 1 }),
+      taxes: q.settings.taxes.map((t, j) => ({ label: F(['settings', 'taxes', j, 'label']), rate: F(['settings', 'taxes', j, 'rate'], { num: 1 }), rm: rmAt(['settings', 'taxes'], j) })),
+      addTax: addTo(['settings', 'taxes'], () => ({ label: 'Tax', rate: 0 })),
+      drawer: this.state.drawer, tabIsJson: this.state.tab === 'json', tabIsSchema: this.state.tab === 'schema',
+      tabJsonVariant: this.state.tab === 'json' ? 'ink' : 'ghost', tabSchemaVariant: this.state.tab === 'schema' ? 'ink' : 'ghost',
+      tabJson: () => this.setState({ tab: 'json', draft: JSON.stringify(this.state.q, null, 2), err: '' }), tabSchema: () => this.setState({ tab: 'schema' }),
+      openDrawer: () => this.setState({ drawer: true, tab: 'json', draft: JSON.stringify(this.state.q, null, 2), err: '' }),
+      closeDrawer: () => this.setState({ drawer: false }),
+      shareOpen: this.state.shareOpen,
+      openShare: () => this.setState({ shareOpen: true }),
+      closeShare: () => this.setState({ shareOpen: false }),
+      clientLink: this.shareUrl('client'),
+      shareNote: ['localhost', '127.0.0.1'].includes(location.hostname) ? 'This link uses your local server. Publish the site before sending it to a client.' : 'This link contains the current quote. Copy a new link after you edit it. Clients can return their choices with a response link.',
+      selectLink: e => e.target.select(),
+      previewClientLink: () => window.open(this.shareUrl('client'), '_blank', 'noopener'),
+      copyResponseLink: () => this.copy(this.shareUrl('client'), 'Response link copied. Send it to the studio.'),
+      draft: this.state.draft, onDraft: e => this.setState({ draft: e.target.value }),
+      err: this.state.err, hasErr: !!this.state.err,
+      applyDraft: () => { try { const obj = JSON.parse(this.state.draft); this.replace(obj); this.setState({ err: '' }); this.showToast('Applied'); } catch (e) { this.setState({ err: "That JSON doesn't parse: " + e.message }); } },
+      copyJson: () => this.copy(JSON.stringify(this.state.q, null, 2), 'Copied'),
+      copyEditLink: () => this.copy(this.shareUrl('edit'), 'Edit link copied'),
+      copyClientLink: () => this.copy(this.shareUrl('client'), 'Client link copied'),
+      copySchema: () => this.copy(this.state.schema, 'Schema copied'),
+      schemaText: this.state.schema || 'Loading…',
+      apiList: API.map(([sig, does]) => ({ sig, does })),
+      toast: this.state.toast, hasToast: !!this.state.toast, clearToast: () => this.setState({ toast: '' }),
+    };
+  }
+}
+</script>
+<script>
+(() => {
+  const announce = () => { try { window.parent.postMessage({ type: 'quote_hash', hash: location.hash }, location.origin); } catch {} };
+  const replaceState = history.replaceState.bind(history);
+  history.replaceState = (...args) => { replaceState(...args); announce(); };
+  addEventListener('hashchange', announce);
+})();
+</script>
+</body>
+</html>

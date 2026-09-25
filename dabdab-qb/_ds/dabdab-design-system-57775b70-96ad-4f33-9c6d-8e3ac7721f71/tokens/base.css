@@ -1,0 +1,38 @@
+/* Minimal base layer — resets + the two brand texture helpers. Consumers get this free. */
+*, *::before, *::after { box-sizing: border-box }
+html { -webkit-text-size-adjust: 100% }
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body-color);
+  font: var(--type-body);
+  letter-spacing: var(--tracking-normal);
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { color: var(--text-heading); margin: 0 }
+h1 { font: var(--type-h1); letter-spacing: var(--tracking-tighter) }
+h2 { font: var(--type-h2); letter-spacing: var(--tracking-tight) }
+h3 { font: var(--type-h3); letter-spacing: var(--tracking-tight) }
+p { margin: 0 }
+a { color: var(--text-link); text-decoration-thickness: 2px; text-underline-offset: 3px; transition: color var(--dur-fast) var(--ease-dab) }
+a:hover { color: var(--text-link-hover) }
+code, kbd, samp, pre { font: var(--type-code) }
+::selection { background: var(--dab-yellow-500); color: var(--ink) }
+:focus-visible { outline: none; box-shadow: var(--focus-ring) }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important }
+}
+
+/* Brand weave: the hand-drawn grid as a tintable overlay. Decorative only. */
+.dab-weave { position: relative; isolation: isolate }
+.dab-weave::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("../assets/patterns/weave-alpha.png"); background-repeat: repeat;
+  background-size: var(--pattern-tile) var(--pattern-tile);
+  opacity: var(--pattern-ink-opacity);
+}
+.dab-weave-strong { --pattern-ink-opacity: 0.16; /* @kind other */ }
+
+/* Eyebrow / mono label — used above nearly every headline. */
+.dab-eyebrow { font: var(--type-eyebrow); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-muted) }

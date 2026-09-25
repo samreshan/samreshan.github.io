@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dabdab.quote/v1",
+  "title": "dabdab quotation",
+  "description": "A full quote document. Every field is optional: the builder fills defaults and generates ids. Money values are plain numbers in settings.currency. Sections render in array order; set enabled:false to hide one without deleting it.",
+  "type": "object",
+  "properties": {
+    "schema": { "const": "dabdab.quote/v1" },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "number": { "type": "string", "description": "Quote reference, e.g. DAB-2026-014" },
+        "issuedOn": { "type": "string", "format": "date" },
+        "validUntil": { "type": "string", "format": "date" },
+        "status": { "enum": ["draft", "sent", "accepted"] }
+      }
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "contact": { "type": "string", "description": "Person the quote is addressed to" },
+        "email": { "type": "string" },
+        "address": { "type": "string" }
+      }
+    },
+    "studio": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "default": "dabdab" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "website": { "type": "string" }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "currency": { "type": "string", "description": "ISO 4217 code", "examples": ["NPR", "USD", "EUR", "GBP", "INR", "AUD"] },
+        "theme": { "enum": ["bold", "restrained"], "description": "bold = yellow weave cover; restrained = paper and ink" },
+        "discount": { "type": "number", "description": "Percent off the subtotal, 0-100" },
+        "taxes": {
+          "type": "array",
+          "description": "Applied after discount, each on the discounted subtotal",
+          "items": { "type": "object", "properties": { "label": { "type": "string" }, "rate": { "type": "number", "description": "Percent" } } }
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "properties": { "option": { "type": ["string", "null"], "description": "id of the chosen pricing option; defaults to the recommended one" } }
+    },
+    "sections": { "type": "array", "items": { "$ref": "#/$defs/section" } }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "enum": ["cover", "overview", "scope", "pricing", "addons", "summary", "timeline", "payment", "assumptions", "terms", "acceptance"] },
+        "enabled": { "type": "boolean", "default": true },
+        "title": { "type": "string", "description": "Section headline, sentence case, 6 words or fewer. For cover this is the big title." }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "cover" } } }, "then": { "properties": { "intro": { "type": "string", "description": "Intro letter, plain text, blank lines split paragraphs" }, "signoff": { "type": "string" } } } },
+        { "if": { "properties": { "type": { "const": "overview" } } }, "then": { "properties": { "body": { "type": "string" }, "goals": { "type": "array", "items": { "type": "string" } } } } },
+        { "if": { "properties": { "type": { "const": "scope" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "object", "properties": { "title": { "type": "string" }, "detail": { "type": "string" } } } } } } },
+        { "if": { "properties": { "type": { "const": "pricing" } } }, "then": { "properties": {
+          "options": { "type": "array", "description": "One option = a single price. Two or more = client chooses one.", "items": { "type": "object", "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "summary": { "type": "string" },
+            "duration": { "type": "string", "description": "e.g. 4 weeks" },
+            "model": { "enum": ["fixed", "milestone", "retainer"], "description": "fixed = qty x rate lines; milestone = each line is a payable milestone; retainer = lines are per month" },
+            "term": { "type": "number", "description": "Retainer length in months" },
+            "recommended": { "type": "boolean" },
+            "items": { "type": "array", "items": { "type": "object", "properties": { "label": { "type": "string" }, "qty": { "type": "number", "default": 1 }, "rate": { "type": "number" } } } }
+          } } } } } },
+        { "if": { "properties": { "type": { "const": "addons" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "object", "properties": { "label": { "type": "string" }, "detail": { "type": "string" }, "price": { "type": "number" }, "recurring": { "type": "boolean", "description": "true = per month" }, "selected": { "type": "boolean" } } } } } } },
+        { "if": { "properties": { "type": { "const": "summary" } } }, "then": { "properties": { "note": { "type": "string" } }, "description": "Totals are computed; nothing to fill but an optional note." } },
+        { "if": { "properties": { "type": { "const": "timeline" } } }, "then": { "properties": { "note": { "type": "string" }, "phases": { "type": "array", "items": { "type": "object", "properties": { "when": { "type": "string", "description": "e.g. Week 1" }, "label": { "type": "string" }, "detail": { "type": "string" } } } } } } },
+        { "if": { "properties": { "type": { "const": "payment" } } }, "then": { "properties": { "note": { "type": "string" }, "milestones": { "type": "array", "description": "Percents should add up to 100; amounts are computed from the total", "items": { "type": "object", "properties": { "label": { "type": "string" }, "percent": { "type": "number" }, "due": { "type": "string" } } } } } } },
+        { "if": { "properties": { "type": { "const": "assumptions" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "string" } }, "exclusions": { "type": "array", "items": { "type": "string" } } } } },
+        { "if": { "properties": { "type": { "const": "terms" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "string" } } } } },
+        { "if": { "properties": { "type": { "const": "acceptance" } } }, "then": { "properties": { "note": { "type": "string" }, "signer": { "type": "object", "properties": { "name": { "type": "string" }, "role": { "type": "string" }, "date": { "type": "string" }, "accepted": { "type": "boolean" } } } } } }
+      ]
+    }
+  }
+}

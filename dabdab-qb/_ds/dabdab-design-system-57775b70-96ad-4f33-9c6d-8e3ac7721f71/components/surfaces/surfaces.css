@@ -1,0 +1,80 @@
+/* Surfaces — cards, pattern panels, dialogs, tooltips, toasts. */
+
+/* ---- Card ------------------------------------------------------------ */
+.dab-card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--surface-card); border-radius: var(--radius-xl);
+  border: var(--border-hairline) solid var(--border-subtle);
+  box-shadow: var(--shadow-soft-1); padding: var(--space-6);
+  transition: var(--transition-control); color: var(--text-body-color);
+}
+.dab-card--sticker { border: var(--border-thick) solid var(--ink); box-shadow: var(--shadow-sticker) }
+.dab-card--flat { box-shadow: none }
+.dab-card--ink { background: var(--surface-ink); border-color: var(--ink); color: var(--alpha-paper-72) }
+.dab-card--ink .dab-card__title { color: var(--paper) }
+.dab-card--brand { background: var(--surface-brand); border: var(--border-thick) solid var(--ink); color: var(--ink); box-shadow: var(--shadow-sticker) }
+.dab-card--interactive { cursor: pointer }
+.dab-card--interactive:hover { transform: translateY(var(--hover-lift)); box-shadow: var(--shadow-soft-3) }
+.dab-card--sticker.dab-card--interactive:hover, .dab-card--brand.dab-card--interactive:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink) }
+.dab-card--sticker.dab-card--interactive:active, .dab-card--brand.dab-card--interactive:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink) }
+.dab-card__media { margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-5); overflow: hidden; border-radius: var(--radius-xl) var(--radius-xl) 0 0; background: var(--n-100) }
+.dab-card__media img, .dab-card__media > * { display: block; width: 100%; height: 100%; object-fit: cover }
+.dab-card__eyebrow { font: var(--type-eyebrow); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2) }
+.dab-card__title { font: var(--type-h3); color: var(--text-heading); letter-spacing: var(--tracking-tight) }
+.dab-card__body { margin-top: var(--space-2); font-size: var(--text-base); line-height: var(--leading-normal) }
+.dab-card__footer { margin-top: var(--space-5); display: flex; align-items: center; gap: var(--space-3) }
+
+/* ---- PatternPanel ---------------------------------------------------- */
+.dab-panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--radius-2xl) }
+.dab-panel--square { border-radius: 0 }
+.dab-panel__texture { position: absolute; inset: 0; pointer-events: none; background-repeat: repeat; background-position: center }
+.dab-panel--brand .dab-panel__texture { background-image: url("../../assets/patterns/weave-brand.png") }
+.dab-panel--ink .dab-panel__texture { background-image: url("../../assets/patterns/weave-ink.png") }
+.dab-panel--paper .dab-panel__texture { background-image: url("../../assets/patterns/weave-paper.png") }
+.dab-panel__inner { position: relative; z-index: 1 }
+.dab-panel--paper { background: var(--paper); color: var(--text-body-color) }
+.dab-panel--brand { background: var(--dab-yellow-500); color: var(--ink) }
+.dab-panel--ink { background: var(--ink); color: var(--alpha-paper-72) }
+
+/* ---- Dialog ---------------------------------------------------------- */
+.dab-dialog__scrim { position: fixed; inset: 0; background: var(--scrim); -webkit-backdrop-filter: var(--blur-veil); backdrop-filter: var(--blur-veil); display: grid; place-items: center; padding: var(--space-6); z-index: 60; animation: dab-fade var(--dur-base) var(--ease-dab) }
+.dab-dialog {
+  position: relative; width: 100%; max-width: 480px; background: var(--n-0);
+  border: var(--border-thick) solid var(--ink); border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sticker-lg); padding: var(--space-6);
+  animation: dab-pop var(--dur-slow) var(--ease-spring);
+}
+.dab-dialog__head { display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-3) }
+.dab-dialog__title { font: var(--type-h2); color: var(--text-heading); letter-spacing: var(--tracking-tight); flex: 1 }
+.dab-dialog__body { font-size: var(--text-base); line-height: var(--leading-normal); color: var(--text-body-color) }
+.dab-dialog__footer { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6) }
+@keyframes dab-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes dab-pop { from { opacity: 0; transform: translateY(12px) scale(0.97) } to { opacity: 1; transform: none } }
+
+/* ---- Tooltip --------------------------------------------------------- */
+.dab-tooltip { position: relative; display: inline-flex }
+.dab-tooltip__bubble {
+  position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translate(-50%, 4px);
+  background: var(--ink); color: var(--paper); font: var(--type-label); font-size: var(--text-xs);
+  padding: var(--space-15) var(--space-3); border-radius: var(--radius-sm); white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease-dab), transform var(--dur-fast) var(--ease-dab); z-index: 40;
+}
+.dab-tooltip--bottom .dab-tooltip__bubble { bottom: auto; top: calc(100% + 8px); transform: translate(-50%, -4px) }
+.dab-tooltip:hover .dab-tooltip__bubble, .dab-tooltip:focus-within .dab-tooltip__bubble { opacity: 1; transform: translate(-50%, 0) }
+
+/* ---- Toast ----------------------------------------------------------- */
+.dab-toast {
+  display: flex; align-items: flex-start; gap: var(--space-3); width: 100%; max-width: 380px;
+  background: var(--n-0); border: var(--border-thick) solid var(--ink); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sticker); padding: var(--space-3) var(--space-4);
+  animation: dab-slide-in var(--dur-slow) var(--ease-spring);
+}
+.dab-toast__icon { flex: none; margin-top: 2px }
+.dab-toast--success .dab-toast__icon { color: var(--status-success-solid) }
+.dab-toast--danger .dab-toast__icon { color: var(--status-danger-solid) }
+.dab-toast--info .dab-toast__icon { color: var(--status-info-solid) }
+.dab-toast--brand { background: var(--surface-brand) }
+.dab-toast__text { flex: 1; min-width: 0 }
+.dab-toast__title { font: var(--type-label); color: var(--text-heading) }
+.dab-toast__msg { font-size: var(--text-xs); color: var(--text-muted); margin-top: 1px }
+@keyframes dab-slide-in { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }

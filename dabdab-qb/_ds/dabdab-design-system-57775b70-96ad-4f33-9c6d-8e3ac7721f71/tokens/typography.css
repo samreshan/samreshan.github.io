@@ -1,0 +1,53 @@
+/* Typography — families, scale, weights, tracking, leading. */
+:root {
+  --font-display: "Big Shoulders Display", "Readex Pro", system-ui, sans-serif;
+  --font-sans: "Readex Pro", system-ui, -apple-system, sans-serif;
+  --font-logo: "Readex Pro", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Scale — 15px UI base, aggressive jumps at display sizes. */
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 17px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 30px;
+  --text-3xl: 38px;
+  --text-4xl: 48px;
+  --text-5xl: 62px;
+  --text-6xl: 80px;
+  --text-7xl: 104px;
+  --text-8xl: 136px;
+
+  --leading-flat: 0.92;
+  --leading-tight: 1.04;
+  --leading-snug: 1.2;
+  --leading-normal: 1.45;
+  --leading-loose: 1.62;
+
+  --tracking-tighter: -0.012em; /* display is condensed — it needs far less negative tracking */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.12em;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* Composed roles */
+  --type-display: var(--weight-black) var(--text-7xl) / var(--leading-flat) var(--font-display);
+  --type-h1: var(--weight-black) var(--text-5xl) / var(--leading-tight) var(--font-display);
+  --type-h2: var(--weight-bold) var(--text-3xl) / var(--leading-snug) var(--font-display);
+  --type-h3: var(--weight-semibold) var(--text-lg) / var(--leading-snug) var(--font-sans);
+  --type-body: var(--weight-regular) var(--text-base) / var(--leading-normal) var(--font-sans);
+  --type-body-lg: var(--weight-regular) var(--text-md) / var(--leading-loose) var(--font-sans);
+  --type-label: var(--weight-medium) var(--text-sm) / var(--leading-snug) var(--font-sans);
+  --type-eyebrow: var(--weight-bold) var(--text-xs) / var(--leading-snug) var(--font-mono);
+  --type-code: var(--weight-regular) var(--text-sm) / var(--leading-normal) var(--font-mono);
+}

@@ -1,0 +1,63 @@
+/* Form controls — hard 2px ink borders, generous radii, yellow as the "on" state. */
+
+.dab-field { display: flex; flex-direction: column; gap: var(--space-15) }
+.dab-field__label { font: var(--type-label); color: var(--text-heading); display: flex; align-items: center; gap: var(--space-15) }
+.dab-field__req { color: var(--status-danger-solid) }
+.dab-field__hint { font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-sans) }
+.dab-field__error { font-size: var(--text-xs); color: var(--status-danger-fg); font-family: var(--font-sans); display: flex; align-items: center; gap: var(--space-1) }
+
+.dab-input, .dab-textarea, .dab-select__control {
+  width: 100%; font: var(--type-body); color: var(--text-heading);
+  background: var(--n-0); border: var(--border-thick) solid var(--ink);
+  border-radius: var(--radius-md); padding: 0 var(--space-4); height: var(--control-h-md);
+  transition: var(--transition-control);
+}
+.dab-input::placeholder, .dab-textarea::placeholder { color: var(--text-faint) }
+.dab-input:hover, .dab-textarea:hover, .dab-select__control:hover { background: var(--dab-yellow-50) }
+.dab-input:focus, .dab-textarea:focus, .dab-select__control:focus {
+  outline: none; background: var(--n-0); box-shadow: var(--shadow-sticker-sm);
+}
+.dab-input--sm { height: var(--control-h-sm); font-size: var(--text-sm); padding: 0 var(--space-3) }
+.dab-input--lg { height: var(--control-h-lg); font-size: var(--text-md) }
+.dab-input--invalid, .dab-textarea--invalid { border-color: var(--status-danger-solid) }
+.dab-input[disabled], .dab-textarea[disabled] { background: var(--n-50); border-color: var(--n-300); color: var(--text-faint); cursor: not-allowed }
+.dab-textarea { height: auto; padding: var(--space-3) var(--space-4); resize: vertical; line-height: var(--leading-normal) }
+
+.dab-input-wrap { position: relative; display: flex; align-items: center }
+.dab-input-wrap .dab-icon { position: absolute; left: var(--space-4); color: var(--text-muted); pointer-events: none }
+.dab-input-wrap--icon .dab-input { padding-left: 44px }
+
+.dab-select { position: relative; display: block }
+.dab-select__control { appearance: none; cursor: pointer; padding-right: 40px }
+.dab-select__chev { position: absolute; right: var(--space-4); top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-heading) }
+
+/* Checkbox / radio — real inputs, visually replaced. */
+.dab-check { display: inline-flex; align-items: flex-start; gap: var(--space-3); cursor: pointer; font: var(--type-body); color: var(--text-body-color) }
+.dab-check__box {
+  flex: none; width: 22px; height: 22px; margin-top: 1px; display: grid; place-items: center;
+  border: var(--border-thick) solid var(--ink); background: var(--n-0);
+  border-radius: var(--radius-xs); transition: var(--transition-control); color: transparent;
+}
+.dab-check--radio .dab-check__box { border-radius: var(--radius-pill) }
+.dab-check input { position: absolute; opacity: 0; width: 0; height: 0 }
+.dab-check:hover .dab-check__box { background: var(--dab-yellow-50) }
+.dab-check input:checked + .dab-check__box { background: var(--surface-brand); color: var(--ink) }
+.dab-check input:focus-visible + .dab-check__box { box-shadow: var(--focus-ring) }
+.dab-check__dot { width: 9px; height: 9px; border-radius: var(--radius-pill); background: currentColor }
+.dab-check--disabled { opacity: 0.42; cursor: not-allowed }
+.dab-check__text { display: flex; flex-direction: column; gap: 1px }
+.dab-check__desc { font-size: var(--text-xs); color: var(--text-muted) }
+
+/* Switch */
+.dab-switch { display: inline-flex; align-items: center; gap: var(--space-3); cursor: pointer; font: var(--type-body); color: var(--text-body-color) }
+.dab-switch input { position: absolute; opacity: 0; width: 0; height: 0 }
+.dab-switch__track {
+  flex: none; width: 46px; height: 26px; border-radius: var(--radius-pill);
+  border: var(--border-thick) solid var(--ink); background: var(--n-100);
+  padding: 2px; display: flex; transition: var(--transition-control);
+}
+.dab-switch__knob { width: 18px; height: 18px; border-radius: var(--radius-pill); background: var(--ink); transition: transform var(--dur-base) var(--ease-spring) }
+.dab-switch input:checked + .dab-switch__track { background: var(--surface-brand) }
+.dab-switch input:checked + .dab-switch__track .dab-switch__knob { transform: translateX(20px) }
+.dab-switch input:focus-visible + .dab-switch__track { box-shadow: var(--focus-ring) }
+.dab-switch--disabled { opacity: 0.42; cursor: not-allowed }

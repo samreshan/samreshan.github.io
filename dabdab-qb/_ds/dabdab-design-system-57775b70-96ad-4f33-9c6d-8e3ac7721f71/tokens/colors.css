@@ -1,0 +1,52 @@
+/* Colors — base ramps. Primary yellow + ink sampled from the supplied brand artwork. */
+:root {
+  /* Dab Yellow — the brand's single loud colour. 500 is THE yellow (#FDB713). */
+  --dab-yellow-50: #fff8e3;
+  --dab-yellow-100: #feedb8;
+  --dab-yellow-200: #fedf86;
+  --dab-yellow-300: #fdcd51;
+  --dab-yellow-400: #fdbe3a; /* pattern-on-yellow tint from the artwork */
+  --dab-yellow-500: #fdb713; /* PRIMARY */
+  --dab-yellow-600: #e09d00;
+  --dab-yellow-700: #b17b00;
+  --dab-yellow-800: #7a5400;
+  --dab-yellow-900: #422e00;
+
+  /* Ink & neutrals — very slightly cool, to sit under the warm yellow. */
+  --ink: #000000;      /* brand black: the logo mark, outlines, type */
+  --paper: #f7f9f9;    /* brand off-white sampled from the artwork */
+  --n-0: #ffffff;
+  --n-25: #f7f9f9;
+  --n-50: #f0f2f2;
+  --n-100: #e3e6e6;
+  --n-200: #cacecd;
+  --n-300: #a7acab;
+  --n-400: #7d8382;
+  --n-500: #595f5e;
+  --n-600: #3d4241;
+  --n-700: #282c2b;
+  --n-800: #171918;
+  --n-900: #0a0b0b;
+  --n-1000: #000000;
+
+  /* Accents — used in single dabs, never as a gradient wash. */
+  --accent-blue: #2c6bf2;
+  --accent-blue-soft: #dbe6fe;
+  --accent-coral: #e03a28;
+  --accent-coral-soft: #fbdedb;
+  --accent-green: #15a06a;
+  --accent-green-soft: #d6f2e6;
+  --accent-orange: #f2751f;
+  --accent-orange-soft: #fde5d3;
+
+  /* Alpha utilities */
+  --alpha-ink-04: rgba(0, 0, 0, 0.04);
+  --alpha-ink-08: rgba(0, 0, 0, 0.08);
+  --alpha-ink-12: rgba(0, 0, 0, 0.12);
+  --alpha-ink-24: rgba(0, 0, 0, 0.24);
+  --alpha-ink-64: rgba(0, 0, 0, 0.64);
+  --alpha-paper-12: rgba(247, 249, 249, 0.12);
+  --alpha-paper-24: rgba(247, 249, 249, 0.24);
+  --alpha-paper-72: rgba(247, 249, 249, 0.72);
+  --alpha-yellow-32: rgba(253, 183, 19, 0.32);
+}

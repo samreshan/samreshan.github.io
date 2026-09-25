@@ -1,0 +1,108 @@
+/* Core primitives — buttons, icon buttons, badges, tags, icons, logo. */
+
+/* ---- Button ---------------------------------------------------------- */
+.dab-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  font-family: var(--font-sans); font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight); text-decoration: none; white-space: nowrap;
+  border-radius: var(--radius-pill); border: var(--border-thick) solid transparent;
+  cursor: pointer; transition: var(--transition-control); position: relative;
+  -webkit-user-select: none; user-select: none;
+}
+.dab-btn:focus-visible { outline: none; box-shadow: var(--focus-ring) }
+.dab-btn--sm { height: var(--control-h-sm); padding: 0 var(--space-4); font-size: var(--text-sm) }
+.dab-btn--md { height: var(--control-h-md); padding: 0 var(--space-5); font-size: var(--text-base) }
+.dab-btn--lg { height: var(--control-h-lg); padding: 0 var(--space-6); font-size: var(--text-md) }
+.dab-btn--full { width: 100% }
+
+.dab-btn--primary { background: var(--surface-brand); color: var(--text-on-brand); border-color: var(--ink); box-shadow: var(--shadow-sticker) }
+.dab-btn--primary:hover { background: var(--surface-brand-hover); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink) }
+.dab-btn--primary:active { background: var(--surface-brand-active); transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink) }
+
+.dab-btn--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); box-shadow: var(--shadow-sticker-yellow) }
+.dab-btn--ink:hover { background: var(--n-800); transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--dab-yellow-500) }
+.dab-btn--ink:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--dab-yellow-500) }
+
+.dab-btn--outline { background: transparent; color: var(--ink); border-color: var(--ink) }
+.dab-btn--outline:hover { background: var(--surface-brand-soft) }
+.dab-btn--outline:active { background: var(--dab-yellow-200) }
+
+.dab-btn--ghost { background: transparent; color: var(--text-heading); border-color: transparent }
+.dab-btn--ghost:hover { background: var(--alpha-ink-04) }
+.dab-btn--ghost:active { background: var(--alpha-ink-08) }
+
+.dab-btn--danger { background: var(--status-danger-solid); color: var(--n-0); border-color: var(--ink); box-shadow: var(--shadow-sticker) }
+.dab-btn--danger:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink) }
+.dab-btn--danger:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink) }
+
+.dab-btn[disabled], .dab-btn[aria-disabled="true"] {
+  opacity: 0.38; pointer-events: none; box-shadow: none; transform: none;
+}
+
+/* ---- IconButton ------------------------------------------------------ */
+.dab-iconbtn {
+  display: inline-grid; place-items: center; flex: none; cursor: pointer;
+  border: var(--border-thick) solid transparent; border-radius: var(--radius-pill);
+  background: transparent; color: var(--text-heading); transition: var(--transition-control);
+}
+.dab-iconbtn:focus-visible { outline: none; box-shadow: var(--focus-ring) }
+.dab-iconbtn--sm { width: 32px; height: 32px }
+.dab-iconbtn--md { width: 40px; height: 40px }
+.dab-iconbtn--lg { width: 48px; height: 48px }
+.dab-iconbtn--ghost:hover { background: var(--alpha-ink-04) }
+.dab-iconbtn--ghost:active { background: var(--alpha-ink-08) }
+.dab-iconbtn--outline { border-color: var(--ink) }
+.dab-iconbtn--outline:hover { background: var(--surface-brand-soft) }
+.dab-iconbtn--primary { background: var(--surface-brand); border-color: var(--ink); box-shadow: var(--shadow-sticker-sm) }
+.dab-iconbtn--primary:hover { background: var(--surface-brand-hover); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink) }
+.dab-iconbtn--primary:active { transform: translate(2px, 2px); box-shadow: none }
+.dab-iconbtn--ink { background: var(--ink); color: var(--paper); border-color: var(--ink) }
+.dab-iconbtn--ink:hover { background: var(--n-700) }
+.dab-iconbtn[disabled] { opacity: 0.38; pointer-events: none }
+
+/* ---- Icon (lucide via mask, so it inherits currentColor) -------------- */
+.dab-icon {
+  display: inline-block; flex: none; background: currentColor;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: contain; mask-size: contain;
+}
+
+/* ---- Badge ----------------------------------------------------------- */
+.dab-badge {
+  display: inline-flex; align-items: center; gap: var(--space-15);
+  font: var(--type-eyebrow); letter-spacing: var(--tracking-caps); text-transform: uppercase;
+  padding: 3px var(--space-2) 2px; border-radius: var(--radius-xs); border: var(--border-hairline) solid transparent;
+}
+.dab-badge--brand { background: var(--surface-brand); color: var(--ink) }
+.dab-badge--ink { background: var(--ink); color: var(--paper) }
+.dab-badge--success { background: var(--status-success-bg); color: var(--status-success-fg) }
+.dab-badge--danger { background: var(--status-danger-bg); color: var(--status-danger-fg) }
+.dab-badge--warning { background: var(--status-warning-bg); color: var(--status-warning-fg) }
+.dab-badge--info { background: var(--status-info-bg); color: var(--status-info-fg) }
+.dab-badge--neutral { background: var(--n-100); color: var(--n-600) }
+.dab-badge--outline { background: transparent; color: var(--text-heading); border-color: var(--border-default) }
+.dab-badge__dot { width: 6px; height: 6px; border-radius: var(--radius-pill); background: currentColor }
+
+/* ---- Tag ------------------------------------------------------------- */
+.dab-tag {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1;
+  padding: var(--space-15) var(--space-3); border-radius: var(--radius-pill);
+  border: var(--border-hairline) solid var(--border-default); background: var(--n-0);
+  color: var(--text-body-color); transition: var(--transition-control);
+}
+.dab-tag--interactive { cursor: pointer }
+.dab-tag--interactive:hover { border-color: var(--ink); color: var(--text-heading) }
+.dab-tag--selected { background: var(--surface-brand); border-color: var(--ink); color: var(--ink) }
+.dab-tag__remove {
+  display: grid; place-items: center; width: 14px; height: 14px; margin-right: -2px;
+  border: none; background: transparent; color: inherit; cursor: pointer; padding: 0; opacity: 0.6;
+}
+.dab-tag__remove:hover { opacity: 1 }
+
+/* ---- Logo ------------------------------------------------------------ */
+.dab-logo { display: inline-flex; align-items: center; gap: 0.42em; color: var(--ink); text-decoration: none }
+.dab-logo--stacked { flex-direction: column; align-items: flex-start; gap: 0.22em }
+.dab-logo__mark { display: block; flex: none; background: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center }
+.dab-logo__word { font-family: var(--font-logo); font-weight: var(--weight-light); letter-spacing: -0.03em; line-height: 1; font-size: 1em }
