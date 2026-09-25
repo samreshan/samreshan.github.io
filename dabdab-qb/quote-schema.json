@@ -49,7 +49,7 @@
     },
     "selection": {
       "type": "object",
-      "properties": { "option": { "type": ["string", "null"], "description": "id of the chosen pricing option; defaults to the recommended one" } }
+      "properties": { "option": { "type": ["string", "null"], "description": "Legacy field; the builder clears it because client selection is disabled" } }
     },
     "sections": { "type": "array", "items": { "$ref": "#/$defs/section" } }
   },
@@ -68,7 +68,7 @@
         { "if": { "properties": { "type": { "const": "overview" } } }, "then": { "properties": { "body": { "type": "string" }, "goals": { "type": "array", "items": { "type": "string" } } } } },
         { "if": { "properties": { "type": { "const": "scope" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "object", "properties": { "title": { "type": "string" }, "detail": { "type": "string" } } } } } } },
         { "if": { "properties": { "type": { "const": "pricing" } } }, "then": { "properties": {
-          "options": { "type": "array", "description": "One option = a single price. Two or more = client chooses one.", "items": { "type": "object", "properties": {
+          "options": { "type": "array", "description": "Indicative approaches for discussion; clients cannot select them.", "items": { "type": "object", "properties": {
             "id": { "type": "string" },
             "name": { "type": "string" },
             "summary": { "type": "string" },
@@ -79,7 +79,7 @@
             "items": { "type": "array", "items": { "type": "object", "properties": { "label": { "type": "string" }, "qty": { "type": "number", "default": 1 }, "rate": { "type": "number" } } } }
           } } } } } },
         { "if": { "properties": { "type": { "const": "addons" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "object", "properties": { "label": { "type": "string" }, "detail": { "type": "string" }, "price": { "type": "number" }, "recurring": { "type": "boolean", "description": "true = per month" }, "selected": { "type": "boolean" } } } } } } },
-        { "if": { "properties": { "type": { "const": "summary" } } }, "then": { "properties": { "note": { "type": "string" } }, "description": "Totals are computed; nothing to fill but an optional note." } },
+        { "if": { "properties": { "type": { "const": "summary" } } }, "then": { "properties": { "note": { "type": "string" } }, "description": "Call to action and next steps; no final total is displayed." } },
         { "if": { "properties": { "type": { "const": "timeline" } } }, "then": { "properties": { "note": { "type": "string" }, "phases": { "type": "array", "items": { "type": "object", "properties": { "when": { "type": "string", "description": "e.g. Week 1" }, "label": { "type": "string" }, "detail": { "type": "string" } } } } } } },
         { "if": { "properties": { "type": { "const": "payment" } } }, "then": { "properties": { "note": { "type": "string" }, "milestones": { "type": "array", "description": "Percents should add up to 100; amounts are computed from the total", "items": { "type": "object", "properties": { "label": { "type": "string" }, "percent": { "type": "number" }, "due": { "type": "string" } } } } } } },
         { "if": { "properties": { "type": { "const": "assumptions" } } }, "then": { "properties": { "items": { "type": "array", "items": { "type": "string" } }, "exclusions": { "type": "array", "items": { "type": "string" } } } } },

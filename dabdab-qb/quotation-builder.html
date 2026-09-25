@@ -33,7 +33,7 @@
     textarea::placeholder,input::placeholder{color:var(--n-300)}
     input[type=number]{-moz-appearance:textfield}
     input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-    @page{size:A4;margin:12mm 0}
+    @page{size:A4;margin:0}
     [data-canvas]{overflow-x:auto}
     [data-sheet]{box-sizing:border-box!important;width:210mm!important;max-width:none!important;min-height:297mm;padding-top:12mm!important;overflow:visible!important;border:0!important;border-radius:0!important;background-color:#fff!important;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(297mm - 2px),#b5b5b5 calc(297mm - 2px),#b5b5b5 297mm)!important}
     [data-sheet]>section{display:block!important;overflow:visible!important;padding:12mm 14mm!important;break-inside:auto!important}
@@ -87,13 +87,12 @@
   </sc-if>
   <sc-if value="{{ sharedClient }}">
     <span style="font-size:13px;color:var(--text-muted)">Client copy</span>
-    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="outline" iconLeft="link" onClick="{{ copyResponseLink }}" hint-size="150px,32px">Copy response link</x-import>
   </sc-if>
   <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ink" iconLeft="printer" onClick="{{ doPrint }}" hint-size="125px,32px">Download PDF</x-import>
 </header>
 
 <sc-if value="{{ sharedClient }}">
-  <div data-noprint="1" style="padding:11px 20px;background:var(--paper);border-bottom:1px solid var(--border-subtle);font-size:13px;line-height:1.45;color:var(--text-muted);text-align:center">Review the quote, choose an option or add-ons, then copy the response link to send your choices back.</div>
+  <div data-noprint="1" style="padding:11px 20px;background:var(--paper);border-bottom:1px solid var(--border-subtle);font-size:13px;line-height:1.45;color:var(--text-muted);text-align:center">Review the proposed approaches, then get in touch to discuss scope and a tailored price.</div>
 </sc-if>
 
 <div style="display:flex;flex-wrap:wrap;align-items:flex-start;min-height:calc(100vh - 64px)">
@@ -133,30 +132,21 @@
         </div>
       </div>
 
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Document</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;color:var(--ink)">
+          <span>Include signature</span>
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Switch" checked="{{ signatureEnabled }}" onChange="{{ toggleSignature }}" aria-label="Include signature" hint-size="40px,24px"></x-import>
+        </div>
+        <span style="font-size:12px;line-height:1.45;color:var(--text-muted)">Adds an acknowledgement line to the PDF.</span>
+      </div>
+
       <div style="display:flex;flex-direction:column;gap:12px">
-        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Money</span>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Currency
-            <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ currencyOpts }}" value="{{ currency }}" onChange="{{ setCurrency }}" hint-size="100%,36px"></x-import>
-          </label>
-          <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Discount %
-            <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" type="number" value="{{ discount.v }}" onChange="{{ discount.on }}" hint-size="100%,36px"></x-import>
-          </label>
-        </div>
-        <sc-for list="{{ taxes }}" as="t" hint-placeholder-count="1">
-          <div style="display:grid;grid-template-columns:minmax(0,1fr) 72px 28px;gap:8px;align-items:end">
-            <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Tax label
-              <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" value="{{ t.label.v }}" onChange="{{ t.label.on }}" hint-size="100%,36px"></x-import>
-            </label>
-            <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Rate %
-              <x-import component-from-global-scope="DabdabDesignSystem_57775b.Input" size="sm" type="number" value="{{ t.rate.v }}" onChange="{{ t.rate.on }}" hint-size="100%,36px"></x-import>
-            </label>
-            <x-import component-from-global-scope="DabdabDesignSystem_57775b.IconButton" icon="x" label="Remove tax" size="sm" variant="ghost" onClick="{{ t.rm }}" hint-size="28px,28px"></x-import>
-          </div>
-        </sc-for>
-        <div style="display:flex">
-          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" size="sm" variant="ghost" iconLeft="plus" onClick="{{ addTax }}" hint-size="96px,32px">Add tax</x-import>
-        </div>
+        <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Estimates</span>
+        <label style="display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--text-muted)">Currency
+          <x-import component-from-global-scope="DabdabDesignSystem_57775b.Select" size="sm" options="{{ currencyOpts }}" value="{{ currency }}" onChange="{{ setCurrency }}" hint-size="100%,36px"></x-import>
+        </label>
+        <span style="font-size:12px;line-height:1.45;color:var(--text-muted)">Figures in the document are indicative. Confirm a final price after scoping.</span>
       </div>
     </aside>
   </sc-if>
@@ -201,10 +191,6 @@
                       <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">Valid until</span>
                       <input value="{{ M.valid.v }}" onChange="{{ M.valid.on }}" placeholder="YYYY-MM-DD" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hovInk }}" style-focus="background:{{ hovInk }}">
                     </div>
-                    <div style="display:flex;flex-direction:column;gap:4px">
-                      <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase">{{ coverPriceLabel }}</span>
-                      <span style="font-size:15px;font-weight:600">{{ coverPrice }}</span>
-                    </div>
                   </div>
                 </div>
               </x-import>
@@ -233,10 +219,6 @@
                   <div style="display:flex;flex-direction:column;gap:4px">
                     <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Valid until</span>
                     <input value="{{ M.valid.v }}" onChange="{{ M.valid.on }}" placeholder="YYYY-MM-DD" style="field-sizing:content;width:100%;min-width:0;border:0;background:transparent;font:inherit;color:inherit;padding:0;outline:none;border-radius:4px;font-size:15px;font-weight:500" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}">
-                  </div>
-                  <div style="display:flex;flex-direction:column;gap:4px">
-                    <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">{{ coverPriceLabel }}</span>
-                    <span style="font-size:15px;font-weight:600;color:var(--ink)">{{ coverPrice }}</span>
                   </div>
                 </div>
               </div>
@@ -287,19 +269,14 @@
           </sc-if>
 
           <sc-if value="{{ s.isPricing }}">
-            <sc-if value="{{ s.multi }}">
-              <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">{{ s.hint }}</p>
-            </sc-if>
+            <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">{{ s.hint }}</p>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start">
               <sc-for list="{{ s.options }}" as="o" hint-placeholder-count="2">
-                <div data-keep="1" onClick="{{ o.pick }}" style="background:var(--n-0);border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:14px;cursor:{{ o.cursor }};border:{{ o.border }};box-shadow:{{ o.shadow }};transition:box-shadow 140ms var(--ease-dab), border-color 140ms var(--ease-dab)">
+                <div data-keep="1" style="background:var(--n-0);border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:14px;border:{{ o.border }};box-shadow:{{ o.shadow }}">
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:28px">
                     <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="neutral" hint-size="80px,20px">{{ o.modelLabel }}</x-import>
                     <sc-if value="{{ o.recommended }}">
                       <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="outline" hint-size="100px,20px">Recommended</x-import>
-                    </sc-if>
-                    <sc-if value="{{ o.selected }}">
-                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="brand" dot="{{ true }}" hint-size="80px,20px">Selected</x-import>
                     </sc-if>
                     <span style="flex:1"></span>
                     <sc-if value="{{ ed }}">
@@ -356,9 +333,6 @@
                     <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">{{ o.totalLabel }}</span>
                     <span style="font-family:var(--font-display);font-weight:800;font-size:36px;line-height:1;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums">{{ o.total }}</span>
                   </div>
-                  <sc-if value="{{ o.isRetainer }}">
-                    <span style="font-size:13px;color:var(--text-muted)">{{ o.contract }}</span>
-                  </sc-if>
                 </div>
               </sc-for>
             </div>
@@ -368,20 +342,17 @@
           </sc-if>
 
           <sc-if value="{{ s.isAddons }}">
-            <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">Tick any you want. They're added to the total.</p>
+            <p style="margin:-12px 0 0;font-size:15px;color:var(--text-muted)">Additional services can be scoped during the planning call.</p>
             <div style="display:flex;flex-direction:column">
               <sc-for list="{{ s.items }}" as="a" hint-placeholder-count="3">
-                <div data-keep="1" style="display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:6px 16px;align-items:start;padding:16px 0;border-top:1px solid var(--border-subtle)">
-                  <div style="padding-top:2px">
-                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Checkbox" checked="{{ a.selected }}" onChange="{{ a.toggle }}" aria-label="Include add-on" hint-size="20px,20px"></x-import>
-                  </div>
+                <div data-keep="1" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:start;padding:16px 0;border-top:1px solid var(--border-subtle)">
                   <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
                     <textarea rows="1" value="{{ a.label.v }}" onChange="{{ a.label.on }}" placeholder="{{ ph.item }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--ink);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:16px;font-weight:600" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
                     <textarea rows="1" value="{{ a.detail.v }}" onChange="{{ a.detail.on }}" placeholder="{{ ph.detail }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
                   </div>
                   <span style="font-size:15px;font-weight:600;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums">{{ a.priceFmt }}</span>
                   <sc-if value="{{ ed }}">
-                    <div data-noprint="1" style="grid-column:2 / -1;display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);flex-wrap:wrap">
+                    <div data-noprint="1" style="grid-column:1 / -1;display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:12px;color:var(--text-muted);flex-wrap:wrap">
                       <span>{{ currency }}</span>
                       <input type="number" value="{{ a.price.v }}" onChange="{{ a.price.on }}" style="width:11ch;border:1px solid var(--border-default);border-radius:8px;background:var(--n-0);font:inherit;color:var(--ink);padding:3px 6px;outline:none;text-align:right" style-focus="border-color:var(--ink)">
                       <x-import component-from-global-scope="DabdabDesignSystem_57775b.Switch" checked="{{ a.recurring }}" onChange="{{ a.toggleRec }}" label="Monthly" hint-size="90px,24px"></x-import>
@@ -398,41 +369,16 @@
           </sc-if>
 
           <sc-if value="{{ s.isSummary }}">
-            <sc-if value="{{ bold }}" hint-placeholder-val="{{ true }}">
-              <div data-keep="1" class="dab-on-ink" style="background:var(--ink);border-radius:26px;padding:32px;display:flex;flex-direction:column;gap:4px">
-                <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="3">
-                  <div style="display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--n-700);font-size:15px">
-                    <span style="color:var(--n-200)">{{ r.label }}</span>
-                    <span style="color:var(--paper);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.value }}</span>
-                  </div>
-                </sc-for>
-                <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:20px">
-                  <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--paper)">{{ totalLabel }}</span>
-                  <span style="font-family:var(--font-display);font-weight:800;font-size:68px;line-height:0.92;letter-spacing:-0.012em;color:var(--dab-yellow-500);font-variant-numeric:tabular-nums">{{ grandTotal }}</span>
-                </div>
-                <sc-if value="{{ hasExtra }}">
-                  <span style="font-size:14px;color:var(--n-200);text-align:right">{{ extraLine }}</span>
-                </sc-if>
+            <div data-keep="1" style="background:{{ ctaBg }};color:{{ ctaInk }};border:1px solid {{ ctaBorder }};border-radius:26px;padding:32px;display:flex;flex-direction:column;gap:18px">
+              <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:{{ ctaMuted }}">Next step</span>
+              <span style="font-family:var(--font-display);font-weight:800;font-size:52px;line-height:0.95;letter-spacing:-0.012em;max-width:15ch">Let's talk through the right fit</span>
+              <textarea rows="2" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:620px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:{{ ctaInk }};padding:0;margin:0;outline:none;overflow:hidden;display:block;font-size:16px;line-height:1.55" style-hover="background:transparent" style-focus="background:transparent"></textarea>
+              <div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid {{ ctaBorder }}">
+                <span style="font-family:var(--font-mono);font-size:11px;line-height:1.5;letter-spacing:0.08em;text-transform:uppercase;color:{{ ctaMuted }}">Scope and final pricing are confirmed together</span>
+                <sc-if value="{{ ctaHasLink }}"><a href="{{ ctaHref }}" style="font-size:14px;font-weight:600;color:{{ ctaInk }};text-decoration:underline;text-underline-offset:3px">{{ ctaContact }}</a></sc-if>
+                <sc-if value="{{ ctaNoLink }}"><span style="font-size:14px;font-weight:600;color:{{ ctaInk }}">{{ ctaContact }}</span></sc-if>
               </div>
-            </sc-if>
-            <sc-if value="{{ restrained }}">
-              <div data-keep="1" style="display:flex;flex-direction:column;gap:4px">
-                <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="3">
-                  <div style="display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--border-subtle);font-size:15px">
-                    <span style="color:var(--text-muted)">{{ r.label }}</span>
-                    <span style="color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap">{{ r.value }}</span>
-                  </div>
-                </sc-for>
-                <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:2px solid var(--ink)">
-                  <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">{{ totalLabel }}</span>
-                  <span style="font-family:var(--font-display);font-weight:800;font-size:56px;line-height:0.92;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums;box-shadow:inset 0 -10px 0 var(--dab-yellow-500)">{{ grandTotal }}</span>
-                </div>
-                <sc-if value="{{ hasExtra }}">
-                  <span style="font-size:14px;color:var(--text-muted);text-align:right;padding-top:8px">{{ extraLine }}</span>
-                </sc-if>
-              </div>
-            </sc-if>
-            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-muted);padding:0;margin:0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:14px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+            </div>
           </sc-if>
 
           <sc-if value="{{ s.isTimeline }}">
@@ -539,33 +485,25 @@
           </sc-if>
 
           <sc-if value="{{ s.isAcceptance }}">
-            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:640px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:8px 0 0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:15px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:640px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:8px 0 0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:15px;line-height:1.5" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
             <div data-keep="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;padding:28px;border-radius:26px;border:2px solid var(--ink);box-shadow:{{ accShadow }}">
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">You're accepting</span>
-                <span style="font-size:17px;font-weight:600;color:var(--ink)">{{ acceptLine }}</span>
-                <span style="font-family:var(--font-display);font-weight:800;font-size:44px;line-height:1;letter-spacing:-0.012em;color:var(--ink);font-variant-numeric:tabular-nums">{{ grandTotal }}</span>
+              <div style="display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:160px">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Acknowledgement</span>
+                  <span style="font-family:var(--font-display);font-weight:800;font-size:42px;line-height:1;color:var(--ink)">Signature</span>
+                </div>
+                <span style="display:block;border-bottom:2px solid var(--ink);height:24px" aria-label="Signature line"></span>
               </div>
               <div style="display:flex;flex-direction:column;gap:16px">
                 <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Name
-                  <input data-client-input="1" value="{{ s.name.v }}" onChange="{{ s.name.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                  <input value="{{ s.name.v }}" onChange="{{ s.name.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
                 </label>
                 <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Role
-                  <input data-client-input="1" value="{{ s.role.v }}" onChange="{{ s.role.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                  <input value="{{ s.role.v }}" onChange="{{ s.role.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
                 </label>
-                <sc-if value="{{ s.accepted }}">
-                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Badge" tone="success" dot="{{ true }}" hint-size="140px,20px">{{ s.acceptedOn }}</x-import>
-                    <sc-if value="{{ ed }}">
-                      <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" data-noprint="1" size="sm" variant="ghost" onClick="{{ s.reset }}" hint-size="80px,32px">Reset</x-import>
-                    </sc-if>
-                  </div>
-                </sc-if>
-                <sc-if value="{{ s.canAccept }}">
-                  <div data-noprint="1" style="display:flex">
-                    <x-import component-from-global-scope="DabdabDesignSystem_57775b.Button" variant="primary" iconRight="arrow-right" onClick="{{ s.accept }}" hint-size="160px,44px">Accept quote</x-import>
-                  </div>
-                </sc-if>
+                <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Date
+                  <input value="{{ s.date.v }}" onChange="{{ s.date.on }}" placeholder="YYYY-MM-DD" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                </label>
               </div>
             </div>
           </sc-if>
@@ -590,7 +528,7 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
         <div style="display:flex;flex-direction:column;gap:6px">
           <span style="font-family:var(--font-display);font-size:32px;font-weight:800;line-height:1">Share this quote</span>
-          <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">Send a link that opens the client view with this quote and its current pricing.</span>
+          <span style="font-size:14px;line-height:1.5;color:var(--text-muted)">Send a read-only proposal with indicative estimates and a clear next step.</span>
         </div>
         <button type="button" onClick="{{ closeShare }}" aria-label="Close share dialog" style="flex:none;border:0;background:transparent;color:var(--ink);font-size:24px;line-height:1;cursor:pointer">×</button>
       </div>
@@ -686,23 +624,23 @@ const TYPES = {
   scope: { label: 'Scope & deliverables', title: "What we'll build", d: () => ({ items: [] }) },
   pricing: { label: 'Pricing', title: 'Pricing', d: () => ({ options: [] }) },
   addons: { label: 'Optional add-ons', title: 'Optional add-ons', d: () => ({ items: [] }) },
-  summary: { label: 'Investment summary', title: 'Investment', d: () => ({ note: '' }) },
+  summary: { label: 'Next steps', title: 'Next steps', d: () => ({ note: '' }) },
   timeline: { label: 'Timeline & milestones', title: 'Timeline', d: () => ({ phases: [], note: '' }) },
   payment: { label: 'Payment schedule', title: 'Payment schedule', d: () => ({ milestones: [], note: '' }) },
   assumptions: { label: 'Assumptions & exclusions', title: 'Assumptions', d: () => ({ items: [], exclusions: [] }) },
   terms: { label: 'Terms & conditions', title: 'Terms', d: () => ({ items: [] }) },
-  acceptance: { label: 'Acceptance & signature', title: 'Sign and start', d: () => ({ note: '', signer: { name: '', role: '', date: '', accepted: false } }) },
+  acceptance: { label: 'Signature', title: 'Signature', d: () => ({ note: '', signer: { name: '', role: '', date: '', accepted: false } }) },
 };
-const MODELS = { fixed: 'Fixed price', milestone: 'Milestones', retainer: 'Retainer' };
+const MODELS = { fixed: 'Project', milestone: 'Phased', retainer: 'Monthly' };
 
 const TEMPLATES = {
   website: () => ({
     meta: { number: 'SAMPLE-001', issuedOn: today(), validUntil: addDays(today(), 30), status: 'draft' },
     client: { name: 'Example client', contact: '', email: '', address: '' },
     studio: { name: 'dabdab', address: 'Kathmandu, Nepal' },
-    settings: { currency: 'NPR', theme: 'restrained', discount: 0, taxes: [{ label: 'VAT', rate: 13 }] },
+    settings: { currency: 'NPR', theme: 'bold', discount: 0, taxes: [] },
     sections: [
-      { type: 'cover', title: 'A new website, two ways to build it', intro: 'Thank you for walking us through the new website.\n\nBelow are two ways to build it. Option A runs on WordPress and ships in four weeks, with editing your team already knows. Option B is a Next.js build with a custom CMS, on an architecture that scales as your programmes and content grow.\n\nPick the one that fits and we start the week you sign.', signoff: 'The dabdab team' },
+      { type: 'cover', title: 'A new website, two ways to build it', intro: 'Thank you for walking us through the new website.\n\nThis proposal outlines two possible approaches. One uses WordPress for familiar editing and a shorter build. The other uses Next.js with a custom CMS for more flexibility as the site grows.\n\nWe can confirm the right scope, timing and final price together after a planning call.', signoff: 'The dabdab team' },
       { type: 'overview', title: "Where we're starting", body: 'The client needs a website that explains its programmes clearly, lets the team publish news and events without a developer, and holds up as content and traffic grow.', goals: ['Clear programme and impact pages', 'Self-serve publishing for news, events and reports', 'Fast on mobile connections'] },
       { type: 'scope', title: "What we'll build", items: [
         { title: 'Discovery and sitemap', detail: 'Stakeholder workshop, content audit, sitemap and page inventory.' },
@@ -719,30 +657,28 @@ const TEMPLATES = {
         { label: 'Care plan', detail: 'Hosting management, updates, backups and security patches.', price: 5000, recurring: true },
         { label: 'Content migration', detail: 'Move existing pages, posts and media into the new CMS.', price: 8000 },
         { label: 'Nepali language version', detail: 'Bilingual setup with a language switcher.', price: 12000 } ] },
-      { type: 'summary', note: '' },
       { type: 'timeline', title: 'Four weeks, start to shipped', phases: [
         { when: 'Week 1', label: 'Discovery and design direction', detail: 'Workshop, sitemap, first design concepts.' },
         { when: 'Week 2', label: 'Designs and sign-off', detail: 'All key templates designed and approved.' },
         { when: 'Week 3', label: 'Build and CMS', detail: 'Development, content blocks, CMS setup.' },
         { when: 'Week 4', label: 'QA, training and launch', detail: 'Testing, team training, go-live.' } ], note: 'Shown for the WordPress option. The Next.js option runs the same phases over eight weeks.' },
-      { type: 'payment', milestones: [ { label: 'On signing', percent: 50, due: 'Before kickoff' }, { label: 'On design sign-off', percent: 30, due: 'End of design phase' }, { label: 'On launch', percent: 20, due: 'Within 7 days of go-live' } ], note: 'Invoices are due within 7 days.' },
       { type: 'assumptions', title: 'What we assume', items: ['You provide final copy, images and logos before build starts.', 'One point of contact approves each stage.', 'Hosting and domain are in your name. We help set them up.'], exclusions: ['Copywriting and photography', 'Paid plugins, themes or third-party licences', 'Ongoing maintenance, unless the care plan is added'] },
-      { type: 'terms', items: ['This quote is valid until the date on the cover.', 'Two revision rounds are included at each design stage. Further rounds are billed separately.', 'Source code and design files transfer to you on final payment.', "Either side can end the engagement with 14 days' written notice. Completed work is billed.", 'Prices are shown before tax. Tax is added at the rate shown in the summary.'] },
-      { type: 'acceptance', note: "Sign below to accept the selected option and add-ons. We'll send the first invoice and book the kickoff." },
+      { type: 'terms', title: 'Important notes', items: ['The approaches and prices shown are indicative and do not form a final offer.', 'Scope, timeline, tax and payment terms will be confirmed in a separate agreement.', 'Third-party licences, hosting and ongoing maintenance are scoped separately unless stated above.'] },
+      { type: 'summary', title: 'Next steps', note: 'Tell us which direction is closest to your needs, or share the questions you still have. We will arrange a call, refine the scope and prepare a tailored final quote.' },
+      { type: 'acceptance', title: 'Signature', enabled: false, note: 'Optional acknowledgement of this proposal. Signing does not confirm a final price or start work.' },
     ],
   }),
   retainer: () => ({
     meta: { number: 'DAB-2026-015', issuedOn: today(), validUntil: addDays(today(), 30) },
     client: { name: 'Client name' },
-    settings: { currency: 'USD', theme: 'restrained', discount: 0, taxes: [] },
+    settings: { currency: 'USD', theme: 'bold', discount: 0, taxes: [] },
     sections: [
       { type: 'cover', title: 'Your product team, on retainer', intro: 'A monthly retainer gives you a standing design and engineering team. We plan each month with you, ship against the plan, and report on what shipped.' },
       { type: 'scope', title: "What's in each month", items: [ { title: 'Product design', detail: 'Research, flows and high-fidelity UI.' }, { title: 'Engineering', detail: 'Front end, backend and infrastructure work.' }, { title: 'Planning and reporting', detail: 'Monthly planning call and a written ship report.' } ] },
       { type: 'pricing', title: 'Monthly fee', options: [ { name: 'Studio retainer', summary: 'A fixed monthly block of design and engineering time.', duration: 'Monthly', model: 'retainer', term: 6, items: [ { label: 'Product design, 40 hours', qty: 1, rate: 2400 }, { label: 'Engineering, 60 hours', qty: 1, rate: 3600 }, { label: 'Planning and reporting', qty: 1, rate: 400 } ] } ] },
-      { type: 'summary' },
-      { type: 'payment', milestones: [ { label: 'Monthly, in advance', percent: 100, due: 'Invoiced on the 1st, due in 7 days' } ] },
-      { type: 'terms', items: ['Unused hours do not roll over.', "Either side can end the retainer with 30 days' written notice.", 'Work shipped each month is yours on payment.'] },
-      { type: 'acceptance', note: 'Sign below to start the retainer.' },
+      { type: 'terms', title: 'Important notes', items: ['The monthly amount is indicative until scope and availability are confirmed.', 'Term, billing and handover details will be agreed in a separate contract.'] },
+      { type: 'summary', title: 'Next steps', note: 'Let us know what support you need each month. We will confirm capacity, priorities and a tailored final fee after a planning call.' },
+      { type: 'acceptance', title: 'Signature', enabled: false, note: 'Optional acknowledgement of this proposal. Signing does not confirm a final fee or start work.' },
     ],
   }),
   blank: () => ({
@@ -750,9 +686,9 @@ const TEMPLATES = {
     sections: [
       { type: 'cover', title: '', intro: '' },
       { type: 'pricing', options: [ { name: 'Option name', items: [ { label: '', qty: 1, rate: 0 } ] } ] },
-      { type: 'summary' },
       { type: 'terms', items: [] },
-      { type: 'acceptance' },
+      { type: 'summary', title: 'Next steps', note: 'Get in touch to discuss the right scope and request a tailored final quote.' },
+      { type: 'acceptance', title: 'Signature', enabled: false, note: 'Optional acknowledgement of this proposal.' },
     ],
   }),
 };
@@ -760,7 +696,7 @@ const TEMPLATES = {
 const API = [
   ['get()', 'Current quote'], ['set(quote)', 'Replace the whole quote'], ['patch(partial)', 'Deep-merge; arrays replace'],
   ['addSection(type, data?, index?)', 'Insert a section, returns id'], ['updateSection(idOrType, partial)', 'Merge into one section'],
-  ['removeSection(idOrType)', 'Delete a section'], ['select(optionId)', 'Choose a pricing option'], ['totals()', 'Computed money'],
+  ['removeSection(idOrType)', 'Delete a section'], ['totals()', 'Computed internal estimate'],
   ['setMode("edit" | "client")', 'Switch view'], ['loadTemplate(name)', 'website · retainer · blank'], ['shareUrl(mode?)', 'Link to this exact quote'],
   ['schema · types', 'JSON Schema and section types'],
 ];
@@ -784,7 +720,7 @@ class Component extends DCLogic {
 
   normalize(q) {
     q = q || {};
-    const base = { schema: 'dabdab.quote/v1', meta: { number: '', issuedOn: today(), validUntil: addDays(today(), 30), status: 'draft' }, client: { name: '', contact: '', email: '', address: '' }, studio: { name: 'dabdab', email: '', phone: '', address: '', website: '' }, settings: { currency: 'NPR', theme: 'restrained', discount: 0, taxes: [{ label: 'VAT', rate: 13 }] }, selection: { option: null } };
+    const base = { schema: 'dabdab.quote/v1', meta: { number: '', issuedOn: today(), validUntil: addDays(today(), 30), status: 'draft' }, client: { name: '', contact: '', email: '', address: '' }, studio: { name: 'dabdab', email: '', phone: '', address: '', website: '' }, settings: { currency: 'NPR', theme: 'bold', discount: 0, taxes: [] }, selection: { option: null } };
     const r = merge(base, { ...q, sections: undefined });
     r.settings.taxes = (Array.isArray(r.settings.taxes) ? r.settings.taxes : []).map(t => ({ label: String(t.label ?? 'Tax'), rate: +t.rate || 0 }));
     r.settings.discount = +r.settings.discount || 0;
@@ -794,16 +730,33 @@ class Component extends DCLogic {
       const n = { ...T.d(), ...s, id: s.id || uid(), enabled: s.enabled !== false, title: s.title ?? T.title };
       if (s.type === 'scope') n.items = ids(n.items, { title: '', detail: '' });
       if (s.type === 'pricing') n.options = ids(n.options, { name: '', summary: '', duration: '', model: 'fixed', term: 12, recommended: false }).map(o => ({ ...o, model: MODELS[o.model] ? o.model : 'fixed', items: ids(o.items, { label: '', qty: 1, rate: 0 }).map(it => ({ ...it, qty: it.qty === undefined ? 1 : +it.qty || 0, rate: +it.rate || 0 })) }));
-      if (s.type === 'addons') n.items = ids(n.items, { label: '', detail: '', price: 0, recurring: false, selected: false }).map(a => ({ ...a, price: +a.price || 0 }));
+      if (s.type === 'addons') n.items = ids(n.items, { label: '', detail: '', price: 0, recurring: false, selected: false }).map(a => ({ ...a, price: +a.price || 0, selected: false }));
       if (s.type === 'timeline') n.phases = ids(n.phases, { when: '', label: '', detail: '' });
       if (s.type === 'payment') n.milestones = ids(n.milestones, { label: '', percent: 0, due: '' }).map(m => ({ ...m, percent: +m.percent || 0 }));
       ['goals', 'exclusions'].forEach(k => { if (k in n) n[k] = (n[k] || []).map(String); });
       if (s.type === 'assumptions' || s.type === 'terms') n.items = (n.items || []).map(String);
-      if (s.type === 'acceptance') n.signer = { name: '', role: '', date: '', accepted: false, ...(s.signer || {}) };
+      if (s.type === 'terms') {
+        const legacyNotes = {
+          'Source code and design files transfer to you on final payment.': 'Ownership and handover details will be set out in the final agreement.',
+          "Either side can end the engagement with 14 days' written notice. Completed work is billed.": 'Project terms will be set out in the final agreement.',
+          'Prices are shown before tax. Tax is added at the rate shown in the summary.': 'All estimates are indicative. Tax and payment terms will be confirmed with the final scope.'
+        };
+        n.items = n.items.map(item => legacyNotes[item] || item);
+        if (n.title === 'Terms') n.title = 'Important notes';
+      }
+      if (s.type === 'cover' && /Pick the one that fits and we start the week you sign\.?$/.test(n.intro || '')) n.intro = n.intro.replace(/Pick the one that fits and we start the week you sign\.?$/, 'We can discuss the right scope, timing and final price together after a planning call.');
+      if (s.type === 'summary') { n.enabled = true; if (n.title === 'Investment') n.title = 'Next steps'; if (!n.note) n.note = 'Get in touch to discuss the right scope and request a tailored final quote.'; }
+      if (s.type === 'acceptance') {
+        n.signer = { name: '', role: '', date: '', accepted: false, ...(s.signer || {}) };
+        if (n.title === 'Sign and start') n.title = 'Signature';
+        if (/^Sign below to accept/.test(n.note || '')) n.note = 'Optional acknowledgement of this proposal. Signing does not confirm a final price or start work.';
+      }
       return n;
     });
-    const opts = this.options(r);
-    if (!opts.find(o => o.id === r.selection.option)) r.selection.option = (opts.find(o => o.recommended) || opts[0] || {}).id || null;
+    const summaries = r.sections.filter(s => s.type === 'summary');
+    const signatures = r.sections.filter(s => s.type === 'acceptance');
+    r.sections = r.sections.filter(s => s.type !== 'summary' && s.type !== 'acceptance').concat(summaries, signatures);
+    r.selection.option = null;
     return r;
   }
 
@@ -819,7 +772,7 @@ class Component extends DCLogic {
 
   compute(q) {
     const opts = this.options(q);
-    const opt = opts.find(o => o.id === q.selection.option) || opts[0] || null;
+    const opt = opts.find(o => o.recommended) || opts[0] || null;
     const ret = !!opt && opt.model === 'retainer';
     const ad = this.sec(q, 'addons');
     const sel = ad ? ad.items.filter(a => a.selected) : [];
@@ -934,7 +887,7 @@ class Component extends DCLogic {
       addSection: (type, data = {}, index) => { if (!TYPES[type]) throw new Error('Unknown section type: ' + type + '. Use one of ' + Object.keys(TYPES).join(', ')); const q = clone(self.state.q); const id = data.id || uid(); const s = { ...data, type, id }; if (index == null) q.sections.push(s); else q.sections.splice(index, 0, s); self.replace(q); return id; },
       updateSection: (key, p) => { const q = clone(self.state.q); const i = self.findIdx(q, key); if (i < 0) throw new Error('No section ' + key); q.sections[i] = merge(q.sections[i], p); self.replace(q); return q.sections[i].id; },
       removeSection: key => { const q = clone(self.state.q); const i = self.findIdx(q, key); if (i < 0) return false; q.sections.splice(i, 1); self.replace(q); return true; },
-      select: id => { self.set(['selection', 'option'], id); return true; },
+      select: () => false,
       totals: () => { const c = self.compute(self.state.q); return { currency: self.state.q.settings.currency, option: c.optId, subtotal: c.sub, addons: c.addIn, discount: c.disc, taxes: c.taxes, total: c.total, recurring: c.ret, extra: c.extra }; },
       setMode: m => { if (self.state.sharedClient && m === 'edit') return false; self.setState({ mode: m === 'client' ? 'client' : 'edit' }); return true; },
       setTheme: t => self.set(['settings', 'theme'], t === 'restrained' ? 'restrained' : 'bold'),
@@ -972,17 +925,14 @@ class Component extends DCLogic {
   renderVals() {
     const { q, mode } = this.state;
     const ed = mode === 'edit';
-    const bold = q.settings.theme !== 'restrained' && !this.state.printMode;
+    const bold = q.settings.theme !== 'restrained';
     const cur = q.settings.currency;
     const fm = n => this.fmt(n, cur);
     const c = this.compute(q);
     const F = (path, o = {}) => { const v = getIn(q, path); return { v: v == null ? '' : v, on: e => { if (!ed && !o.client) return; const raw = e.target.value; this.set(path, o.num ? (raw === '' ? 0 : +raw) : raw); } };};
     const rmAt = (path, j) => e => { if (e && e.stopPropagation) e.stopPropagation(); this.upd(path, a => a.filter((_, k) => k !== j)); };
     const addTo = (path, mk) => e => { if (e && e.stopPropagation) e.stopPropagation(); this.upd(path, a => [...(a || []), mk()]); };
-    const opts = this.options(q);
-    const multi = opts.length > 1;
-
-    const vis = q.sections.map((s, i) => [s, i]).filter(([s]) => s.enabled);
+    const vis = q.sections.map((s, i) => [s, i]).filter(([s]) => s.enabled && s.type !== 'payment');
     const sections = vis.map(([s, i], n) => {
       const P = ['sections', i], T = TYPES[s.type];
       const vm = { id: s.id, num: pad(n + 1), label: T.label, title: F([...P, 'title']), showHead: s.type !== 'cover', pad: s.type === 'cover' ? '0' : '12mm 14mm', bt: n === 0 ? '0' : '1px solid var(--border-subtle)' };
@@ -995,34 +945,30 @@ class Component extends DCLogic {
           vm.items = s.items.map((it, j) => ({ t: F([...P, 'items', j, 'title']), d: F([...P, 'items', j, 'detail']), rm: rmAt([...P, 'items'], j), n: pad(j + 1) }));
           vm.add = addTo([...P, 'items'], () => ({ id: uid(), title: '', detail: '' })); break;
         case 'pricing':
-          vm.multi = s.options.length > 1;
-          vm.hint = 'Choose one option. The summary and payment schedule update to match.';
+          vm.hint = 'Indicative approaches for discussion. Scope and final pricing are confirmed together.';
           vm.options = s.options.map((o, j) => {
-            const OP = [...P, 'options', j], sel = o.id === c.optId, ret = o.model === 'retainer', tot = this.optTotal(o), m = s.options.length > 1;
-            const strong = !m || sel;
+            const OP = [...P, 'options', j], ret = o.model === 'retainer', tot = this.optTotal(o);
+            const strong = !!o.recommended;
             return {
               name: F([...OP, 'name']), summary: F([...OP, 'summary']), duration: F([...OP, 'duration']), term: F([...OP, 'term'], { num: 1 }),
               isRetainer: ret, model: o.model, modelLabel: MODELS[o.model], showQty: o.model === 'fixed', rateUnit: ret ? '/ month' : '',
               setModel: e => this.set([...OP, 'model'], e.target.value),
-              recommended: !!o.recommended, selected: m && sel,
+              recommended: !!o.recommended,
               toggleRec: e => { e.stopPropagation(); this.upd([...P, 'options'], a => a.map((x, k) => ({ ...x, recommended: k === j ? !x.recommended : false }))); },
-              pick: () => { if (m && !sel) this.set(['selection', 'option'], o.id); },
-              cursor: m ? 'pointer' : 'default',
               border: strong ? '2px solid var(--ink)' : '2px solid var(--border-subtle)',
               shadow: bold && strong ? 'var(--shadow-sticker)' : 'none',
               rm: rmAt([...P, 'options'], j),
               items: o.items.map((it, k) => { const IP = [...OP, 'items', k]; return { label: F([...IP, 'label']), qty: F([...IP, 'qty'], { num: 1 }), rate: F([...IP, 'rate'], { num: 1 }), amt: fm(it.qty * it.rate), rm: rmAt([...OP, 'items'], k), showNote: !ed && o.model === 'fixed' && it.qty !== 1, note: it.qty + ' × ' + fm(it.rate) }; }),
               addItem: addTo([...OP, 'items'], () => ({ id: uid(), label: '', qty: 1, rate: 0 })),
-              totalLabel: ret ? 'Per month' : 'Option total',
+              totalLabel: ret ? 'Indicative / month' : 'Indicative budget',
               total: fm(tot),
-              contract: ret ? fm(tot) + ' × ' + (o.term || 0) + ' months = ' + fm(tot * (o.term || 0)) + ' before tax' : '',
             };
           });
           vm.addOption = addTo([...P, 'options'], () => ({ id: uid(), name: 'New option', summary: '', duration: '', model: 'fixed', term: 12, recommended: false, items: [{ id: uid(), label: '', qty: 1, rate: 0 }] })); break;
         case 'addons':
-          vm.items = s.items.map((a, j) => { const AP = [...P, 'items', j]; return { label: F([...AP, 'label']), detail: F([...AP, 'detail']), price: F([...AP, 'price'], { num: 1 }), priceFmt: fm(a.price) + (a.recurring ? ' / month' : ''), selected: !!a.selected, toggle: e => this.set([...AP, 'selected'], e.target.checked), recurring: !!a.recurring, toggleRec: e => this.set([...AP, 'recurring'], e.target.checked), rm: rmAt([...P, 'items'], j) }; });
+          vm.items = s.items.map((a, j) => { const AP = [...P, 'items', j]; return { label: F([...AP, 'label']), detail: F([...AP, 'detail']), price: F([...AP, 'price'], { num: 1 }), priceFmt: fm(a.price) + (a.recurring ? ' / month' : ''), recurring: !!a.recurring, toggleRec: e => this.set([...AP, 'recurring'], e.target.checked), rm: rmAt([...P, 'items'], j) }; });
           vm.add = addTo([...P, 'items'], () => ({ id: uid(), label: '', detail: '', price: 0, recurring: false, selected: false })); break;
-        case 'summary': vm.note = F([...P, 'note']); break;
+        case 'summary': vm.note = { ...F([...P, 'note']), v: s.note || 'Reply to this proposal with your questions or the direction that feels closest. We will refine the scope and prepare a tailored final quote.' }; break;
         case 'timeline':
           vm.phases = s.phases.map((p, j) => ({ when: F([...P, 'phases', j, 'when']), label: F([...P, 'phases', j, 'label']), detail: F([...P, 'phases', j, 'detail']), rm: rmAt([...P, 'phases'], j) }));
           vm.note = F([...P, 'note']); vm.add = addTo([...P, 'phases'], () => ({ id: uid(), when: '', label: '', detail: '' })); break;
@@ -1036,24 +982,13 @@ class Component extends DCLogic {
           vm.addItem = addTo([...P, 'items'], () => ''); vm.addEx = addTo([...P, 'exclusions'], () => ''); break;
         case 'terms': vm.items = list('items'); vm.add = addTo([...P, 'items'], () => ''); break;
         case 'acceptance': {
-          const sg = s.signer || {};
           Object.assign(vm, {
-            note: F([...P, 'note']), name: F([...P, 'signer', 'name'], { client: 1 }), role: F([...P, 'signer', 'role'], { client: 1 }),
-            accepted: !!sg.accepted, canAccept: !sg.accepted, acceptedOn: 'Accepted ' + (sg.date || ''),
-            accept: () => { const nm = (getIn(this.state.q, [...P, 'signer', 'name']) || '').trim(); if (!nm) { this.showToast('Add your name to accept.'); return; } this.upd([...P, 'signer'], x => ({ ...x, accepted: true, date: today() })); this.set(['meta', 'status'], 'accepted'); this.showToast('Accepted'); },
-            reset: () => this.upd([...P, 'signer'], x => ({ ...x, accepted: false, date: '' })),
+            note: F([...P, 'note']), name: F([...P, 'signer', 'name']), role: F([...P, 'signer', 'role']), date: F([...P, 'signer', 'date']),
           }); break; }
       }
       return vm;
     });
 
-    const sumRows = [];
-    if (c.opt) sumRows.push({ label: multi ? c.opt.name || 'Selected option' : (c.opt.name || 'Subtotal'), value: fm(c.sub) + c.per });
-    if (c.addIn) sumRows.push({ label: 'Add-ons', value: fm(c.addIn) + c.per });
-    if (c.disc) sumRows.push({ label: 'Discount (' + q.settings.discount + '%)', value: '− ' + fm(c.disc) });
-    c.taxes.forEach(t => sumRows.push({ label: t.label + ' (' + t.rate + '%)', value: fm(t.amt) }));
-    const extraLine = c.extra ? (c.ret ? 'Plus ' + fm(c.extra) + ' one-off add-ons, before tax' : 'Plus ' + fm(c.extra) + ' / month for recurring add-ons, before tax') : (c.ret && c.term ? fm(c.total) + ' × ' + c.term + ' months = ' + fm(c.total * c.term) : '');
-    const totals = opts.map(o => this.optTotal(o));
     const ph = ed ? { title: 'Section title', client: 'Client name', contact: 'Contact person', address: 'Address', number: 'Quote number', intro: 'Write the intro letter…', signoff: 'Sign-off', body: 'Describe the project…', item: 'Add text', detail: 'Details', note: 'Optional note', option: 'Option name', duration: 'Duration', when: 'When', due: 'When it is due', email: 'Studio email', phone: 'Phone' } : {};
     const hov = ed ? 'var(--alpha-ink-04)' : 'transparent';
 
@@ -1061,29 +996,29 @@ class Component extends DCLogic {
       ed, mode, bold, restrained: !bold, ownerView: !this.state.sharedClient, sharedClient: this.state.sharedClient, nums: this.props.sectionNumbers !== false,
       hov, foc: ed ? 'var(--dab-yellow-50)' : 'transparent', hovInk: ed ? 'var(--alpha-ink-08)' : 'transparent',
       h2: bold ? '64px' : '52px', ph, stop: e => e.stopPropagation(),
-      sections, sumRows, grandTotal: fm(c.total) + c.per, totalLabel: c.ret ? 'Monthly total' : 'Total', hasExtra: !!extraLine, extraLine,
-      acceptLine: c.opt ? (c.opt.name || 'This quote') + (c.addIn ? ' + add-ons' : '') : 'This quote',
+      sections,
       accShadow: bold ? 'var(--shadow-sticker)' : 'none',
-      coverPriceLabel: multi ? 'From' : (c.ret ? 'Per month' : 'Total'),
-      coverPrice: multi ? fm(Math.min(...totals)) : fm(c.total) + c.per,
+      ctaBg: bold ? 'var(--ink)' : 'var(--paper)', ctaInk: bold ? 'var(--paper)' : 'var(--ink)',
+      ctaMuted: bold ? 'var(--n-300)' : 'var(--text-muted)', ctaBorder: bold ? 'var(--n-700)' : 'var(--border-default)',
+      ctaContact: q.studio.email || q.studio.phone || 'Reply to this proposal to arrange a call',
+      ctaHasLink: !!q.studio.email, ctaNoLink: !q.studio.email, ctaHref: 'mailto:' + (q.studio.email || ''),
       quoteNumber: q.meta.number || 'Draft', clientLabel: q.client.name || 'Untitled client',
       M: { number: F(['meta', 'number']), valid: F(['meta', 'validUntil']), clientName: F(['client', 'name']), clientContact: F(['client', 'contact']), clientAddress: F(['client', 'address']), studioEmail: F(['studio', 'email']), studioPhone: F(['studio', 'phone']), studioAddress: F(['studio', 'address']) },
       modelOpts: Object.entries(MODELS).map(([value, label]) => ({ value, label })),
       editVariant: ed ? 'ink' : 'ghost', clientVariant: ed ? 'ghost' : 'ink',
       toEdit: () => this.setState({ mode: 'edit' }), toClient: () => this.setState({ mode: 'client' }),
       doPrint: () => { if (this._printPending) return; this._printPending = true; this._prevMode = this.state.mode; this.setState({ mode: 'client', printMode: true, shareOpen: false, drawer: false }); setTimeout(() => requestAnimationFrame(() => { this.paginate(); window.print(); }), 300); },
-      outline: q.sections.map((s, i) => ({ hover: this.state.hoverRow === s.id, enter: () => this.setState({ hoverRow: s.id }), leave: () => this.setState(st => st.hoverRow === s.id ? { hoverRow: null } : null), label: TYPES[s.type].label, title: s.title || '—', enabled: s.enabled, op: s.enabled ? 1 : 0.45, toggle: e => this.set(['sections', i, 'enabled'], e.target.checked), up: () => this.move(i, -1), down: () => this.move(i, 1), rm: () => this.upd(['sections'], a => a.filter((_, k) => k !== i)), jump: () => { const el = document.getElementById(s.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } })),
-      addOpts: [{ value: '', label: 'Add a section…' }, ...Object.entries(TYPES).map(([value, t]) => ({ value, label: t.label }))],
+      outline: q.sections.map((s, i) => [s, i]).filter(([s]) => s.type !== 'payment').map(([s, i]) => ({ hover: this.state.hoverRow === s.id, enter: () => this.setState({ hoverRow: s.id }), leave: () => this.setState(st => st.hoverRow === s.id ? { hoverRow: null } : null), label: TYPES[s.type].label, title: s.title || '—', enabled: s.enabled, op: s.enabled ? 1 : 0.45, toggle: e => this.set(['sections', i, 'enabled'], e.target.checked), up: () => this.move(i, -1), down: () => this.move(i, 1), rm: () => this.upd(['sections'], a => a.filter((_, k) => k !== i)), jump: () => { const el = document.getElementById(s.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); } })),
+      addOpts: [{ value: '', label: 'Add a section…' }, ...Object.entries(TYPES).filter(([value]) => value !== 'payment' && value !== 'acceptance').map(([value, t]) => ({ value, label: t.label }))],
       addSection: e => { const t = e.target.value; if (!TYPES[t]) return; const qq = clone(this.state.q); const accIdx = qq.sections.findIndex(x => x.type === 'acceptance'); const s = { type: t, id: uid() }; if (accIdx >= 0 && t !== 'acceptance') qq.sections.splice(accIdx, 0, s); else qq.sections.push(s); this.replace(qq); },
+      signatureEnabled: q.sections.some(s => s.type === 'acceptance' && s.enabled),
+      toggleSignature: () => { const current = this.state.q; const i = current.sections.findIndex(s => s.type === 'acceptance'); if (i >= 0) this.set(['sections', i, 'enabled'], !current.sections[i].enabled); else this.upd(['sections'], a => [...a, { type: 'acceptance', id: uid(), enabled: true, title: 'Signature', note: 'Optional acknowledgement of this proposal. Signing does not confirm a final price or start work.', signer: { name: '', role: '', date: '', accepted: false } }]); },
       templateOpts: [{ value: '', label: 'Choose a template…' }, { value: 'website', label: 'Website, two options' }, { value: 'retainer', label: 'Monthly retainer' }, { value: 'blank', label: 'Blank quote' }],
       pickTemplate: e => this.loadTemplate(e.target.value),
       boldVariant: bold ? 'ink' : 'ghost', restrainedVariant: bold ? 'ghost' : 'ink',
       setBold: () => this.set(['settings', 'theme'], 'bold'), setRestrained: () => this.set(['settings', 'theme'], 'restrained'),
       currency: cur, currencyOpts: ['NPR', 'USD', 'EUR', 'GBP', 'INR', 'AUD', 'CAD', 'SGD', 'AED'].concat(['NPR', 'USD', 'EUR', 'GBP', 'INR', 'AUD', 'CAD', 'SGD', 'AED'].includes(cur) ? [] : [cur]),
       setCurrency: e => this.set(['settings', 'currency'], e.target.value),
-      discount: F(['settings', 'discount'], { num: 1 }),
-      taxes: q.settings.taxes.map((t, j) => ({ label: F(['settings', 'taxes', j, 'label']), rate: F(['settings', 'taxes', j, 'rate'], { num: 1 }), rm: rmAt(['settings', 'taxes'], j) })),
-      addTax: addTo(['settings', 'taxes'], () => ({ label: 'Tax', rate: 0 })),
       drawer: this.state.drawer, tabIsJson: this.state.tab === 'json', tabIsSchema: this.state.tab === 'schema',
       tabJsonVariant: this.state.tab === 'json' ? 'ink' : 'ghost', tabSchemaVariant: this.state.tab === 'schema' ? 'ink' : 'ghost',
       tabJson: () => this.setState({ tab: 'json', draft: JSON.stringify(this.state.q, null, 2), err: '' }), tabSchema: () => this.setState({ tab: 'schema' }),
@@ -1093,10 +1028,9 @@ class Component extends DCLogic {
       openShare: () => this.setState({ shareOpen: true }),
       closeShare: () => this.setState({ shareOpen: false }),
       clientLink: this.shareUrl('client'),
-      shareNote: ['localhost', '127.0.0.1'].includes(location.hostname) ? 'This link uses your local server. Publish the site before sending it to a client.' : 'This link contains the current quote. Copy a new link after you edit it. Clients can return their choices with a response link.',
+      shareNote: ['localhost', '127.0.0.1'].includes(location.hostname) ? 'This link uses your local server. Publish the site before sending it to a client.' : 'This link contains the current proposal. Copy a new link after you edit it.',
       selectLink: e => e.target.select(),
       previewClientLink: () => window.open(this.shareUrl('client'), '_blank', 'noopener'),
-      copyResponseLink: () => this.copy(this.shareUrl('client'), 'Response link copied. Send it to the studio.'),
       draft: this.state.draft, onDraft: e => this.setState({ draft: e.target.value }),
       err: this.state.err, hasErr: !!this.state.err,
       applyDraft: () => { try { const obj = JSON.parse(this.state.draft); this.replace(obj); this.setState({ err: '' }); this.showToast('Applied'); } catch (e) { this.setState({ err: "That JSON doesn't parse: " + e.message }); } },
