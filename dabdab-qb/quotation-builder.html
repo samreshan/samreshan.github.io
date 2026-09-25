@@ -41,6 +41,9 @@
     [data-sheet]>section>*+*{margin-top:6mm}
     [data-sheet]>section>:first-child{break-after:avoid-page;page-break-after:avoid}
     [data-sheet] textarea,[data-sheet] input{height:auto!important;max-height:none!important;overflow:visible!important;resize:none!important}
+    [data-sheet][data-quote-mode="client"] input:not([type=checkbox]):not([type=radio]):not([data-client-input]),[data-sheet][data-quote-mode="client"] textarea{pointer-events:none!important;cursor:default!important;caret-color:transparent!important;user-select:text}
+    [data-sheet][data-quote-mode="client"] input:not([type=checkbox]):not([type=radio]):not([data-client-input]):focus,[data-sheet][data-quote-mode="client"] textarea:focus{outline:none!important;box-shadow:none!important;background:transparent!important}
+    [data-sheet][data-quote-mode="client"] input:not([type=checkbox]):not([type=radio]):not([data-client-input])::placeholder,[data-sheet][data-quote-mode="client"] textarea::placeholder{color:transparent!important}
     [data-keep]{break-inside:avoid-page;page-break-inside:avoid}
     .quote-share-overlay{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:20px;background:rgba(22,22,20,.48)}
     .quote-share-dialog{width:min(520px,100%);box-sizing:border-box;padding:28px;background:#fff;border:1px solid var(--border-default);border-radius:18px;box-shadow:0 24px 70px rgba(22,22,20,.18);color:var(--ink)}
@@ -159,7 +162,7 @@
   </sc-if>
 
   <div data-canvas="1" style="flex:1 1 560px;min-width:0;box-sizing:border-box;padding:40px clamp(12px, 3vw, 40px) 120px">
-    <main data-sheet="1" style="max-width:880px;margin:0 auto;background:var(--n-0);border-radius:26px;border:1px solid var(--border-subtle);box-shadow:var(--shadow-soft-2);overflow:hidden;color:var(--text-body-color);font-size:15px;line-height:1.45">
+    <main data-sheet="1" data-quote-mode="{{ mode }}" style="max-width:880px;margin:0 auto;background:var(--n-0);border-radius:26px;border:1px solid var(--border-subtle);box-shadow:var(--shadow-soft-2);overflow:hidden;color:var(--text-body-color);font-size:15px;line-height:1.45">
       <sc-for list="{{ sections }}" as="s" hint-placeholder-count="4">
         <section id="{{ s.id }}" data-screen-label="{{ s.label }}" style="padding:{{ s.pad }};border-top:{{ s.bt }};display:flex;flex-direction:column;gap:28px">
           <sc-if value="{{ s.showHead }}" hint-placeholder-val="{{ true }}">
@@ -536,7 +539,7 @@
           </sc-if>
 
           <sc-if value="{{ s.isAcceptance }}">
-            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:640px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:-12px 0 0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:15px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
+            <textarea rows="1" value="{{ s.note.v }}" onChange="{{ s.note.on }}" placeholder="{{ ph.note }}" style="field-sizing:content;width:100%;max-width:640px;min-width:0;resize:none;border:0;background:transparent;font:inherit;color:var(--text-body-color);padding:0;margin:8px 0 0;outline:none;border-radius:4px;overflow:hidden;display:block;font-size:15px" style-hover="background:{{ hov }}" style-focus="background:{{ foc }}"></textarea>
             <div data-keep="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;padding:28px;border-radius:26px;border:2px solid var(--ink);box-shadow:{{ accShadow }}">
               <div style="display:flex;flex-direction:column;gap:6px">
                 <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">You're accepting</span>
@@ -545,10 +548,10 @@
               </div>
               <div style="display:flex;flex-direction:column;gap:16px">
                 <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Name
-                  <input value="{{ s.name.v }}" onChange="{{ s.name.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                  <input data-client-input="1" value="{{ s.name.v }}" onChange="{{ s.name.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
                 </label>
                 <label style="display:flex;flex-direction:column;gap:2px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Role
-                  <input value="{{ s.role.v }}" onChange="{{ s.role.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
+                  <input data-client-input="1" value="{{ s.role.v }}" onChange="{{ s.role.on }}" style="width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--ink);background:transparent;font-family:var(--font-sans);font-size:18px;letter-spacing:0;text-transform:none;color:var(--ink);padding:4px 0;outline:none" style-focus="border-bottom-color:var(--dab-yellow-500)">
                 </label>
                 <sc-if value="{{ s.accepted }}">
                   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
@@ -853,6 +856,15 @@ class Component extends DCLogic {
   fallbackCopy(text, done) { const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (e) {} t.remove(); done(); }
   loadTemplate(name) { if (TEMPLATES[name]) { this.replace(TEMPLATES[name]()); this.showToast('Template loaded'); } }
 
+  syncDocumentFields() {
+    const client = this.state.mode === 'client';
+    document.querySelectorAll('[data-sheet] input:not([type=checkbox]):not([type=radio]):not([data-client-input]), [data-sheet] textarea').forEach(el => {
+      el.readOnly = client;
+      if (client) { el.tabIndex = -1; el.setAttribute('aria-readonly', 'true'); if (document.activeElement === el) el.blur(); }
+      else { el.removeAttribute('tabindex'); el.removeAttribute('aria-readonly'); }
+    });
+  }
+
   queuePagination() {
     clearTimeout(this._pageTimer);
     this._pageTimer = setTimeout(() => requestAnimationFrame(() => this.paginate()), 30);
@@ -938,12 +950,14 @@ class Component extends DCLogic {
     this._onResize = () => this.queuePagination();
     window.addEventListener('resize', this._onResize);
     if (document.fonts?.ready) document.fonts.ready.then(() => this.queuePagination());
+    requestAnimationFrame(() => this.syncDocumentFields());
     this.queuePagination();
   }
 
   componentWillUnmount() { clearTimeout(this._pageTimer); window.removeEventListener('hashchange', this._onHash); window.removeEventListener('afterprint', this._afterPrint); window.removeEventListener('resize', this._onResize); }
 
   componentDidUpdate() {
+    this.syncDocumentFields();
     this.queuePagination();
     if (this._seenQ !== this.state.q || this._seenMode !== this.state.mode) {
       this._seenQ = this.state.q; this._seenMode = this.state.mode;
@@ -1044,7 +1058,7 @@ class Component extends DCLogic {
     const hov = ed ? 'var(--alpha-ink-04)' : 'transparent';
 
     return {
-      ed, bold, restrained: !bold, ownerView: !this.state.sharedClient, sharedClient: this.state.sharedClient, nums: this.props.sectionNumbers !== false,
+      ed, mode, bold, restrained: !bold, ownerView: !this.state.sharedClient, sharedClient: this.state.sharedClient, nums: this.props.sectionNumbers !== false,
       hov, foc: ed ? 'var(--dab-yellow-50)' : 'transparent', hovInk: ed ? 'var(--alpha-ink-08)' : 'transparent',
       h2: bold ? '64px' : '52px', ph, stop: e => e.stopPropagation(),
       sections, sumRows, grandTotal: fm(c.total) + c.per, totalLabel: c.ret ? 'Monthly total' : 'Total', hasExtra: !!extraLine, extraLine,

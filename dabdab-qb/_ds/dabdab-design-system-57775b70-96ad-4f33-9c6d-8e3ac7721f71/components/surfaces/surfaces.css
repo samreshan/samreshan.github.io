@@ -28,9 +28,9 @@
 .dab-panel { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--radius-2xl) }
 .dab-panel--square { border-radius: 0 }
 .dab-panel__texture { position: absolute; inset: 0; pointer-events: none; background-repeat: repeat; background-position: center }
-.dab-panel--brand .dab-panel__texture { background-image: url("../../assets/patterns/weave-brand.png") }
-.dab-panel--ink .dab-panel__texture { background-image: url("../../assets/patterns/weave-ink.png") }
-.dab-panel--paper .dab-panel__texture { background-image: url("../../assets/patterns/weave-paper.png") }
+.dab-panel--brand .dab-panel__texture { background-image: none }
+.dab-panel--ink .dab-panel__texture { background-image: none }
+.dab-panel--paper .dab-panel__texture { background-image: none }
 .dab-panel__inner { position: relative; z-index: 1 }
 .dab-panel--paper { background: var(--paper); color: var(--text-body-color) }
 .dab-panel--brand { background: var(--dab-yellow-500); color: var(--ink) }

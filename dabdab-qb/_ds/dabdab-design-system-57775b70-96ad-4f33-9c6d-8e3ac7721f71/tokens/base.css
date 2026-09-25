@@ -28,7 +28,7 @@ code, kbd, samp, pre { font: var(--type-code) }
 .dab-weave { position: relative; isolation: isolate }
 .dab-weave::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background-image: url("../assets/patterns/weave-alpha.png"); background-repeat: repeat;
+  background-repeat: repeat;
   background-size: var(--pattern-tile) var(--pattern-tile);
   opacity: var(--pattern-ink-opacity);
 }
